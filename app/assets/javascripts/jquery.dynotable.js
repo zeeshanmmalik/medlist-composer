@@ -29,11 +29,11 @@
             var cloneRow = function(btn) {
                 var clonedRow = $(btn).closest('tr').clone();  
                 var tbod = $(btn).closest('tbody');
-                insertRow(clonedRow, tbod); 
+                insertRow(clonedRow, tbod, btn); 
                 options.onRowClone();
             }
                         
-            var insertRow = function(clonedRow, tbod) {                
+            var insertRow = function(clonedRow, tbod, btn) {                
                 var numRows = $(tbod).children("tr").length;
                 if(options.hideTableOnEmpty && numRows == 0) {
                     $(tbod).parents("table").first().show();
@@ -44,8 +44,13 @@
                     this.id += '__c';
                 });
 
-                //finally append new row to end of table                           
-                $(tbod).append( clonedRow );
+                //finally append new row to end of table
+                if(options.hideTableOnEmpty && numRows == 0) {
+                    $(tbod).append( clonedRow );
+                }
+                else {
+                    $(btn).closest('tr').after( clonedRow );
+                }
                 bindActions(clonedRow);
                 $(tbod).children("tr:last").hide().fadeIn(options.insertFadeSpeed);
             }
