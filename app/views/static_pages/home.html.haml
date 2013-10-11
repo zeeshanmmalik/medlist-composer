@@ -3,33 +3,37 @@
   / %script{src: "http://code.jquery.com/jquery-migrate-1.2.1.js", type: "text/javascript"}
   / %script{src: "http://yandex.st/highlightjs/6.2/highlight.min.js", type: "text/javascript"}
   = javascript_include_tag 'jquery.dynotable.js'
-
+  %script{src: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js", type: "text/javascript"}
+    
   :javascript
     $(document).ready(function(){
       $('#drugs_table').dynoTable();
+
+      $.fn.editable.defaults.mode = 'inline';
+      $.fn.editable.defaults.defaultValue = '...';
+      $.fn.editable.defaults.emptytext = '...';
+      $('p[x_editable],span[x_editable]').editable({
+        type: 'text',
+      });
     });
   
-
+= content_for :page_css do
+  %link{href: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css", rel: "stylesheet"}
+    
 .row
   .span5
-    %p
-      %strong Toronto General Hospital
-    %p
-      %strong Department of Pharmacy
-    %p
-      %strong Medication List
+    %p.bold Toronto General Hospital
+    %p.bold Department of Pharmacy
+    %p.bold Medication List
   .span7
-    %p
-      %strong Name:
-    %p
-      %strong Date:
-    %p
-      %strong Pharmacist:
+    %p.bold Name:
+    %p.bold Date:
+    %p.bold Pharmacist:
 .row
   .span12
     %p
       %strong Medication Allergies:
-      no known drug allergies
+      %span{:x_editable=>true} no known drug allergies
   .span12
     %table#drugs_table.table.table-bordered.table-hover.table-condensed
       %thead
@@ -45,229 +49,110 @@
           %th
           %th
       %tbody
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p Cyclosporine 
-            %p 25 mg, 100 mg capsules 
-            %p
-              %strong (Neoral)
-          %td
-            %p Take  mg twice daily, 12 hours apart
-          %td
-            %p Anti-Rejection
-          %td
-            %p x
-            %p 9am
-          %td
-          %td
-          %td
-            %p x
-            %p 9pm
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p Tacrolimus 
-            %p 1 mg, 5 mg capsules 
-            %p
-              %strong (Prograf)
-          %td
-            %p Take  mg twice daily, 12 hours apart
-          %td
-            %p Anti-Rejection
-          %td
-            %p x
-            %p 9am
-          %td
-          %td
-          %td
-            %p x
-            %p 9pm
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p Prednisone
-            %p 5 mg tablets
-          %td
-            %p Take  mg ( tablets) once daily with food
-          %td
-            %p Anti-Rejection
-          %td
-            %p X
-          %td
-          %td
-          %td
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p Mycophenolate Mofetil
-            %p 250 mg capsules
-            %p
-              %strong (Cellcept) 
-          %td      
-            %p Take 1000 mg (4 capsules) twice daily 
-          %td
-            %p Anti-Rejection
-          %td
-            %p X
-            %p 9am
-          %td
-          %td
-          %td
-            %p X
-            %p 9pm
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p Mycophenolate Sodium
-            %p 180 mg tablets
-            %p
-              %strong (Myfortic)
-          %td
-            %p Take 360 mg (2 tablets) twice daily
-          %td
-            %p Anti-Rejection
-          %td
-            %p X
-            %p 9am
-          %td
-          %td
-          %td
-            %p X
-            %p 9pm
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p Sirolimus
-            %p 1mg tablets
-            %p
-              %strong (Rapamune)
-          %td
-            %p Take 2mg (2 tablets) once daily.
-            %p
-              %strong Do not take within 4 hrs of Tacrolimus dose.
-          %td
-            %p Anti-Rejection
-          %td
-          %td
-            %p X
-            %p 1pm
-          %td
-          %td
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p Pantoprazole
-            %p 40 mg tablets
-            %p
-              %strong (Pantoloc)
-          %td
-            %p Take 40 mg (1 tablet) once daily
-          %td
-            %p Prevents stomach ulcers
-          %td
-            %p X
-          %td
-          %td
-          %td
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p Omeprazole
-            %p 20 mg tablets
-            %p
-              %strong (Losec)
-          %td
-            %p Take 20mg (1 tablet) twice daily
-          %td
-            %p Prevents stomach ulcers
-          %td
-            %p X
-          %td
-          %td
-          %td
-            %p X
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p Pentamidine inhalation
-          %td
-            %p Inhale 300mg once a month in clinic.
-            %p Next dose: week of
-          %td
-            %p Prevents PCP pneumonia
-          %td
-          %td
-          %td
-          %td
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
-        %tr
-          %td.dyno-action
-            = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
-          %td
-            %p
-              %strong Septra Single Strength tablets
-            %p (Sulfatrim SS OR Sulfameth/Trimeth 400mg/80mg)
-          %td
-            %p Take 1 tablet once daily
-          %td
-            %p Prevents PCP pneumonia
-          %td
-            %p X
-          %td
-          %td
-          %td
-          %td.dyno-action
-            = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
-          %td.dyno-action
-            = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Cyclosporine',
+                          :strength_form=>'25 mg, 100 mg capsules',
+                          :brand=>'Neoral',
+                          :instructions=>['Take  mg twice daily, 12 hours apart'],
+                          :purpose=>'Anti-Rejection',
+                          :am=>{:check=>'x',:instruction=>'9am'},
+                          :noon=>{:check=>'',:instruction=>''},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'x',:instruction=>'9pm'} }
 
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Tacrolimus',
+                          :strength_form=>'1 mg, 5 mg capsules',
+                          :brand=>'Prograf',
+                          :instructions=>['Take 1 mg twice daily, 12 hours apart.'],
+                          :purpose=>'Anti-Rejection', :am=>{:check=>'x',:instruction=>'9am'},
+                          :noon=>{:check=>'',:instruction=>''},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'x',:instruction=>'9pm'} }
+
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Prednisone',
+                          :strength_form=>'5 mg tablets',
+                          :brand=>'',
+                          :instructions=>['Take  mg ( tablets) once daily with food'],
+                          :purpose=>'Anti-Rejection',
+                          :am=>{:check=>'x',:instruction=>''},
+                          :noon=>{:check=>'',:instruction=>''},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'',:instruction=>''} }
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Mycophenolate Mofetil',
+                          :strength_form=>'250 mg capsules',
+                          :brand=>'Cellcept',
+                          :instructions=>['Take 1000 mg','(4 capsules) twice daily'],
+                          :purpose=>'Anti-Rejection',
+                          :am=>{:check=>'x',:instruction=>'9am'},
+                          :noon=>{:check=>'',:instruction=>''},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'x',:instruction=>'9pm'} }
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Mycophenolate Sodium',
+                          :strength_form=>'180 mg tablets',
+                          :brand=>'Myfortic',
+                          :instructions=>['Take 360 mg (2 tablets) twice daily'],
+                          :purpose=>'Anti-Rejection',
+                          :am=>{:check=>'x',:instruction=>'9am'},
+                          :noon=>{:check=>'',:instruction=>''},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'x',:instruction=>'9pm'} }
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Sirolimus',
+                          :strength_form=>'1mg tablets',
+                          :brand=>'Rapamune',
+                          :instructions=>['Take 2mg (2 tablets) once daily.','Do not take within 4 hrs of Tacrolimus dose.'],
+                          :purpose=>'Anti-Rejection',
+                          :am=>{:check=>'',:instruction=>''},
+                          :noon=>{:check=>'x',:instruction=>'1pm'},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'',:instruction=>''} }
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Pantoprazole',
+                          :strength_form=>'40 mg tablets',
+                          :brand=>'Pantoloc',
+                          :instructions=>['Take 40 mg (1 tablet) once daily'],
+                          :purpose=>'Prevents stomach ulcers',
+                          :am=>{:check=>'x',:instruction=>''},
+                          :noon=>{:check=>'',:instruction=>''},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'',:instruction=>''} }
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Omeprazole',
+                          :strength_form=>'20 mg tablets',
+                          :brand=>'Losec',
+                          :instructions=>['Take 20mg (1 tablet) twice daily'],
+                          :purpose=>'Prevents stomach ulcers',
+                          :am=>{:check=>'x',:instruction=>''},
+                          :noon=>{:check=>'',:instruction=>''},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'x',:instruction=>''} }
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Pentamidine',
+                          :strength_form=>'inhalation',
+                          :brand=>'',
+                          :instructions=>['Inhale 300mg once a month in clinic.', 'Next dose: week of'],
+                          :purpose=>'Prevents PCP pneumonia',
+                          :am=>{:check=>'',:instruction=>''},
+                          :noon=>{:check=>'',:instruction=>''},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'',:instruction=>''} }
+        = render partial: 'drug_row',
+                 locals: {:generic_name=>'Septra Single Strength tablets',
+                          :strength_form=>'(Sulfatrim SS OR Sulfameth/Trimeth 400mg/80mg)',
+                          :brand=>'',
+                          :instructions=>['Take 1 tablet once daily'],
+                          :purpose=>'Prevents PCP pneumonia',
+                          :am=>{:check=>'x',:instruction=>''},
+                          :noon=>{:check=>'',:instruction=>''},
+                          :supper=>{:check=>'',:instruction=>''},
+                          :bed_time=>{:check=>'',:instruction=>''} }
+        
     %span12
-      %p You may use acetaminophen (Tylenol) for pain. Please do not use ibuprofen (Advil, Motrin) or naproxen (Aleve).
+      %p{:x_editable=>true} You may use acetaminophen (Tylenol) for pain. Please do not use ibuprofen (Advil, Motrin) or naproxen (Aleve).
             
 
 

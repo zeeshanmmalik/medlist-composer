@@ -18,6 +18,28 @@ body {
     background-color: #f5f5f5;
 }
 
+p.bold {
+    font-weight: bold;
+}
+
 td.dyno-action {
     vertical-align: middle;
 }
+
+/*-------------------------------------------
+  X-Editable css over-written start
+---------------------------------------------*/  
+.editable-buttons {
+    display: none !important;
+}
+
+.editable-click {
+    border-bottom: none !important;
+}
+
+.editable-unsaved {
+    font-weight: normal !important;
+}
+/*-------------------------------------------
+  X-Editable css over-written end
+---------------------------------------------*/
