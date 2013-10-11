@@ -1,0 +1,31 @@
+%tr
+  %td.dyno-action
+    = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
+  %td
+    %p{:x_editable=>true}=generic_name
+    %p{:x_editable=>true}=strength_form
+    %p.bold{:x_editable=>true}=brand.blank? ? '':"(#{brand})"
+  %td
+    - if instructions.blank?
+      %p{:x_editable=>true}=''
+    - else
+      - instructions.each do |ins|
+        %p{:x_editable=>true}=ins
+  %td
+    %p{:x_editable=>true}=purpose
+  %td
+    %p{:x_editable=>true}=am[:check]
+    %p{:x_editable=>true}=am[:instruction]
+  %td
+    %p{:x_editable=>true}=noon[:check]
+    %p{:x_editable=>true}=noon[:instruction]
+  %td
+    %p{:x_editable=>true}=supper[:check]
+    %p{:x_editable=>true}=supper[:instruction]
+  %td
+    %p{:x_editable=>true}=bed_time[:check]
+    %p{:x_editable=>true}=bed_time[:instruction]
+  %td.dyno-action
+    = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
+  %td.dyno-action
+    = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
