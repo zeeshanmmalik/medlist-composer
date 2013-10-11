@@ -29,7 +29,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'haml-rails', :group => :development
+gem 'haml-rails'
 gem "twitter-bootstrap-rails"
     
 group :test, :development do
