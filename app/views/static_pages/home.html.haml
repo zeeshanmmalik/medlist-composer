@@ -1,0 +1,39 @@
+= content_for :page_js do
+  %script{src: "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js", type: "text/javascript"}
+  = javascript_include_tag 'jquery.dynotable.js'
+
+= content_for :page_css do
+  %script{src: "http://yandex.st/highlightjs/6.2/highlight.min.js", type: "text/javascript"}
+
+
+.row
+  .span5
+    %p
+      %strong Toronto General Hospital
+    %p
+      %strong Department of Pharmacy
+    %p
+      %strong Medication List
+  .span7
+    %p
+      %strong Name:
+    %p
+      %strong Date:
+    %p
+      %strong Pharmacist:
+.row
+  .span12
+    %p
+      %strong Medication Allergies:
+      no known drug allergies
+  .span12
+    %table.table.table-bordered.table-hover
+      %thead
+        %tr
+          %th DRUG
+          %th INSTRUCTIONS
+          %th PURPOSEP
+          %th AM
+          %th NOON
+          %th SUPPER
+      %tbody

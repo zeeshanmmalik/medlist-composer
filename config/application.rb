@@ -30,6 +30,7 @@ module DischargeMedlistComposer
       g.fixture_replacement :factory_girl      
       g.view_specs false
       g.helper_specs false
+      g.template_engine :haml
     end
   end
 end

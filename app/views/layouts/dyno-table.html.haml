@@ -1,0 +1,207 @@
+!!!
+%html
+  %head
+    %title DischargeMedlistComposer
+    = csrf_meta_tags
+    %script{src: "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", type: "text/javascript"}
+    %script{src: "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js", type: "text/javascript"}
+    %script{src: "http://yandex.st/highlightjs/6.2/highlight.min.js", type: "text/javascript"}
+
+    = javascript_include_tag 'jquery.dynotable.js'
+
+    :css
+      body {
+          font-family: arial, verdana, sans-serif;
+      }
+
+      table {
+          background: #D0E5F5;
+          border: 1px solid #c0c0c0; 
+          width: 520px;
+      }
+
+      table td {
+          vertical-align: middle;
+
+      }
+
+      table td input {
+          width: 350px;
+          margin: 0;
+          background: #fff;
+          height: 18px;
+      }  
+
+      table td select {
+          background: #fff;
+          height: 18px;
+          width: 90px;
+      }
+
+      #msg {
+          width: 420px;
+          float:left;
+      }
+
+      button {
+          width: 100px;
+          height: 25px; 
+          float:left;                
+      }
+
+      .clr {
+          clear: both;
+      }
+
+      .row-cloner, .row-remover {
+          cursor: pointer;
+      } 
+
+      pre, code {
+          margin: 0 !important;
+          padding: 0 !important;
+      }
+
+
+    :javascript
+      hljs.tabReplace = '    '; // 4 spaces
+      hljs.initHighlightingOnLoad();
+
+
+      $(document).ready(function(){
+          $('#t1').dynoTable();               
+
+          /*
+           * Table of beers, created with some custom config options and callbacks.
+           */
+          $('#beers').dynoTable({
+              removeClass: '.remove-beer',            //Custom remover class name in beers table 
+              cloneClass: '.clone-beer',              //Custom cloner class name in beers table 
+              addRowTemplateId: '#add-beer-template', //Custom id for beer row template 
+              addRowButtonId: '#add-beer',            //Click this to add a beer!
+              lastRowRemovable: false,                //Don't let the table be empty. Never run out of beer
+              orderable: true,                        //beers can be rearranged
+              dragHandleClass: ".drag-beer",          //class for the click and draggable drag handle
+              onRowRemove: function(){
+                  updateBeerCount();
+                  $('#msg').html("<span style='color:crimson'>Take one down, pass it around!</span>");
+              },
+              onRowClone: function(){
+                  updateBeerCount();
+                  $('#msg').html("<span style='color:orange'>You cloned a beer, nice job.</span>");
+              },
+              onRowAdd: function(){
+                  var numBeers = updateBeerCount();
+                  $('#msg').html("<span style='color:forestgreen'>" + numBeers +  " bottles of beer on the wall, woohoo!</span>");
+              },
+              onRowReorder: function(){
+                  updateBeerCount();
+                  $('#msg').html("<span style='color:blue'>Beers got rearranged and renumbered</span>");
+              }
+          }); 
+
+          updateBeerCount(); //initial bottles of beer
+      });
+
+      /**
+       * Updates the current beers on the wall 
+       */
+      function updateBeerCount() {
+          var count = 0;
+          $('.beer').each(function(){ 
+              count++;
+              var msg = (count == 1) ? "1 bottle" : count + " bottles";
+              $(this).html(msg + " of beer on the wall!");
+          });
+          return count;
+      }  
+
+  %body
+    = yield
+
+    %p
+      %strong dynoTable Example (Click Add Row to add a table row)
+    .wrapper
+      %table#t1.example
+        %tbody.ui-sortable
+          %tr
+            %td
+              = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
+            %td
+              %input#tf{type: "text", value: "Hello World"}/
+            %td
+              %select
+                %option Yes
+                %option No
+                %option Unsure
+            %td
+              = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
+            %td
+              = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
+
+      %a#add-row{href: "#"} Add Row
+    %p
+    %p
+      %strong dynoTable Example customized: (Add Reorder or Delete)
+    %table#beers
+      %tbody.ui-sortable
+        %tr
+          %td
+            = image_tag 'drag.png', :class => 'drag-beer', :alt =>  'click and drag to rearrange'
+          %td.beer 1 bottle of beer on the wall!
+          %td
+            = image_tag 'clone.png', :class => 'clone-beer', :alt => 'Clone Row'
+          %td
+            = image_tag 'remove.png', :class => 'remove-beer', :alt => 'Remove Row' 
+        %tr
+          %td
+            = image_tag 'drag.png', :class => 'drag-beer', :alt =>  'click and drag to rearrange'
+          %td.beer 2 bottles of beer on the wall!
+          %td
+            = image_tag 'clone.png', :class => 'clone-beer', :alt => 'Clone Row'
+          %td
+            = image_tag 'remove.png', :class => 'remove-beer', :alt => 'Remove Row' 
+
+    #msg
+      \ 
+    %button#add-beer Add a Beer!
+    .clr
+
+
+  /
+    %table#t1.example 
+      %tr#add-template
+        %td
+          = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
+        %td
+          %input#tf1{type: "text", value: "I am in a table row!"}
+        %td
+          %select
+            %option Yes
+            %option No
+            %option Unsure
+        %td
+          = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
+        %td
+          = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
+      %tr#add-template
+        %td
+          = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
+        %td
+          %input#tf1{type: "text", value: "I am in a table row!"}
+        %td
+          %select
+            %option Yes
+            %option No
+            %option Unsure
+        %td
+          = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
+        %td
+          = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
+   
+
+  /
+    :javascript
+      $(document).ready(function(){
+        $('#t1').dynoTable();
+      });
