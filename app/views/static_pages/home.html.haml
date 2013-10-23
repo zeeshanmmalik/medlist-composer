@@ -12,9 +12,7 @@
       $.fn.editable.defaults.mode = 'inline';
       $.fn.editable.defaults.defaultValue = '...';
       $.fn.editable.defaults.emptytext = '...';
-      $('p[x_editable],span[x_editable]').editable({
-        type: 'text',
-      });
+      $('[data-editable]').editable();
     });
   
 = content_for :page_css do
@@ -33,7 +31,7 @@
   .span12
     %p
       %strong Medication Allergies:
-      %span{:x_editable=>true} no known drug allergies
+      %span{data: {editable: true, type: 'textarea', inputclass: 'input-large'}} no known drug allergies
   .span12
     %table#drugs_table.table.table-bordered.table-hover.table-condensed
       %thead
@@ -152,7 +150,7 @@
                           :bed_time=>{:check=>'',:instruction=>''} }
         
     %span12
-      %p{:x_editable=>true} You may use acetaminophen (Tylenol) for pain. Please do not use ibuprofen (Advil, Motrin) or naproxen (Aleve).
+      %p{data: {editable: true, type: 'textarea', inputclass: 'input-large'}} You may use acetaminophen (Tylenol) for pain. Please do not use ibuprofen (Advil, Motrin) or naproxen (Aleve).
             
 
 

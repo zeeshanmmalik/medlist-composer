@@ -53,6 +53,9 @@
                 }
                 bindActions(clonedRow);
                 $(tbod).children("tr:last").hide().fadeIn(options.insertFadeSpeed);
+
+                // apply x-editable
+                clonedRow.find('[data-editable]').editable();
             }
                         
             var removeRow = function(btn) {
@@ -102,6 +105,8 @@
                 obj.find(options.cloneClass).each(function() {
                     bindCloneLink($(this));
                 });
+
+
             }
          
             return this.each(function() {                             

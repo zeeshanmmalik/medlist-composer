@@ -40,6 +40,26 @@ td.dyno-action {
 .editable-unsaved {
     font-weight: normal !important;
 }
+
+.input-large {
+    width: 750px !important;
+    height: 40px !important;
+}
+
+.input-long {
+    width: 240px !important;
+}
+
+.input-medium {
+    width: 180px !important;
+}
+
+.input-short {
+    width: 40px !important;
+}
+
+
 /*-------------------------------------------
   X-Editable css over-written end
 ---------------------------------------------*/
+
