@@ -24,9 +24,15 @@
     %p.bold Department of Pharmacy
     %p.bold Medication List
   .span7
-    %p.bold Name:
-    %p.bold Date:
-    %p.bold Pharmacist:
+    %p.bold
+      Name:
+      %span{data: {editable: true, type: 'text', inputclass: 'input-long'}}=''
+    %p.bold
+      Date:
+      %span{data: {editable: true, type: 'date', inputclass: 'input-long'}}=''
+    %p.bold
+      Pharmacist:
+      %span{data: {editable: true, type: 'text', inputclass: 'input-long'}}=''
 .row
   .span12
     %p
