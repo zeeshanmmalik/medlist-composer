@@ -6,7 +6,12 @@ DischargeMedlistComposer::Application.routes.draw do
 
   resources :pharmacists
 
-  resources :patients
+  resources :patients do
+    member do
+      get 'start_discharge_for'
+      get 'create_prescription_for'
+    end
+  end
 
   resources :drugs
 

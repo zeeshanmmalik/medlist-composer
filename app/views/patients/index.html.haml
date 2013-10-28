@@ -1,32 +1,31 @@
-%h1 Listing patients
+.row
+  .span12
+    %h1 Listing patients
+  .span12
+    %table.table.table-striped
+      %tr.column-header
+        %th First Name
+        %th Last Name
+        %th MRN
+        %th Date of Birth
+        %th Program
+        %th Admission Date
+        / %th Discharge Date
+        %th Pharmacist
+        %th Discharge List
+      - @patients.each do |patient|
+        %tr{class: cycle('odd', 'even')}
+          %td= patient.first_name
+          %td= patient.last_name
+          %td= patient.mrn
+          %td= patient.date_of_birth
+          %td= patient.program
+          %td= patient.admission_date
+          / %td= patient.discharge_date
+          %td= patient.pharmacist_id
+          %td= link_to 'Create MedList', start_discharge_for_patient_path(patient), class: 'btn btn-small btn-primary'
 
-%table.table.table-striped
-  %tr.column-header
-    %th First Name
-    %th Last Name
-    %th MRN
-    %th Date of Birth
-    %th Program
-    %th Admission Date
-    / %th Discharge Date
-    %th Pharmacist
-    %th
-    %th
-    %th
-  - @patients.each do |patient|
-    %tr{class: cycle('odd', 'even')}
-      %td= patient.first_name
-      %td= patient.last_name
-      %td= patient.mrn
-      %td= patient.date_of_birth
-      %td= patient.program
-      %td= patient.admission_date
-      / %td= patient.discharge_date
-      %td= patient.pharmacist_id
-      %td= link_to 'Show', patient
-      %td= link_to 'Edit', edit_patient_path(patient)
-      %td= link_to 'Destroy', patient, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
+    %br
 
-= link_to 'New Patient', new_patient_path
+    = link_to 'New Patient', new_patient_path

@@ -1,4 +1,4 @@
-= form_for @template do |f|
+= nested_form_for @template do |f|
   - if @template.errors.any?
     #error_explanation
       %h2= "#{pluralize(@template.errors.count, "error")} prohibited this template from being saved:"
@@ -9,5 +9,66 @@
   .field
     = f.label :name
     = f.text_field :name
+  .clearfix
+  = f.fields_for :drugs do |df|
+    %fieldset
+      %legend Drug
+      .field
+        = df.label :generic_name
+        = df.text_field :generic_name
+      .field
+        = df.label :strength
+        = df.text_field :strength
+      .field
+        = df.label :brand_name
+        = df.text_field :brand_name
+      .field
+        = df.label :purpose
+        = df.text_field :purpose
+      .field
+        = df.label :am_check
+        = df.text_field :am_check
+      .field
+        = df.label :am_time
+        = df.text_field :am_time
+      .field
+        = df.label :noon_check
+        = df.text_field :noon_check
+      .field
+        = df.label :noon_time
+        = df.text_field :noon_time
+      .field
+        = df.label :supper_check
+        = df.text_field :supper_check
+      .field
+        = df.label :supper_time
+        = df.text_field :supper_time
+      .field
+        = df.label :bedtime_check
+        = df.text_field :bedtime_check
+      .field
+        = df.label :bedtime_time
+        = df.text_field :bedtime_time
+      = df.fields_for :instructions do |in_f|
+        %fieldset
+          %p Instruction
+          .field
+            = in_f.text_field :line
+          .field
+            = in_f.link_to_remove "Remove this instruction"
+      .clearfix
+      .field        
+        %p= df.link_to_add "Add an instruction", :instructions
+      .clearfix
+      .field{style: 'float:right;'}
+        = df.link_to_remove "Remove this drug"
+  .clearfix
+  .field
+    %p= f.link_to_add "Add a drug", :drugs
+  .clearfix
+  .field
+    = f.label :note, 'Note:'
+    = f.text_area :note, rows: 2, style: 'width:600px;'
+  .clearfix
   .actions
     = f.submit 'Save'

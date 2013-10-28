@@ -1,5 +1,6 @@
 class PatientsController < ApplicationController
-  before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_pharmacist!
+  before_action :set_patient, only: [:show, :edit, :update, :destroy, :start_discharge_for, :create_prescription_for]
 
   # GET /patients
   # GET /patients.json
@@ -19,6 +20,26 @@ class PatientsController < ApplicationController
 
   # GET /patients/1/edit
   def edit
+  end
+
+  # GET /patients/1/start_discharge_for
+  def start_discharge_for
+    @base_templates = Template.all
+  end
+
+  # GET /patients/1/create_prescription_for
+  def create_prescription_for
+    @prescription = @patient.prescriptions.new
+    @template = Template.find(params[:template_id])
+    @prescription.note = @template.note
+    @prescription.base_template_id = @template.id
+    @prescription.base_template_type = 'base'
+    @prescription.pharmacist_id = current_pharmacist.id
+    @prescription.save
+    @template.drugs.each do |drug|
+      @prescription.drugs.create(drug.as_json)
+    end
+
   end
 
   # POST /patients

@@ -1,0 +1,88 @@
+= content_for :page_js do
+  %script{src: "https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js", type: "text/javascript"}
+  / %script{src: "http://code.jquery.com/jquery-migrate-1.2.1.js", type: "text/javascript"}
+  / %script{src: "http://yandex.st/highlightjs/6.2/highlight.min.js", type: "text/javascript"}
+  = javascript_include_tag 'jquery.dynotable.js'
+  %script{src: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js", type: "text/javascript"}
+    
+  :javascript
+    $(document).ready(function(){
+      $('#drugs_table').dynoTable();
+
+      $.fn.editable.defaults.mode = 'inline';
+      $.fn.editable.defaults.defaultValue = '...';
+      $.fn.editable.defaults.emptytext = '...';
+      $('[data-editable]').editable();
+
+      if($.cookie('TEXT_SIZE')) {
+        $('body').addClass($.cookie('TEXT_SIZE')); 
+      }
+      $('.resizer a').click(function() {
+        var textSize = $(this).parent().attr('class');
+        $('body').removeClass('small medium large').addClass(textSize);
+        $.cookie('TEXT_SIZE',textSize, { path: '/', expires: 10000 });
+        return false;
+      });
+    });
+  
+= content_for :page_css do
+  %link{href: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css", rel: "stylesheet"}
+    
+.row.x-resizeable
+  .span5
+    %p.bold Toronto General Hospital
+    %p.bold Department of Pharmacy
+    %p.bold Medication List
+  .span7
+    %p.bold
+      Name:
+      %span{data: {editable: true, type: 'text', inputclass: 'input-long'}}= @patient.name
+    %p.bold
+      Date:
+      %span{data: {editable: true, type: 'date', inputclass: 'input-long'}}= Date.today
+    %p.bold
+      Pharmacist:
+      %span{data: {editable: true, type: 'text', inputclass: 'input-long'}}= current_pharmacist.name
+.row.x-resizeable
+  .span12
+    %p
+      %strong Medication Allergies:
+      %span{data: {editable: true, type: 'textarea', inputclass: 'input-large'}}= @prescription.alergies
+  .span12
+    %ul.resizer{style:'float:right'}
+      %li.small
+        %a{href: "#"} A
+      %li.medium
+        %a{href: "#"} A
+      %li.large
+        %a{href: "#"} A
+  .span12
+    %table#drugs_table.table.table-bordered.table-hover.table-condensed
+      %thead
+        %tr
+          %th.control
+          %th DRUG
+          %th INSTRUCTIONS
+          %th PURPOSEP
+          %th AM
+          %th NOON
+          %th SUPPER
+          %th BED-TIME
+          %th.control
+          %th.control
+      %tbody
+        - @prescription.drugs.each do |drug|
+          = render partial: 'drug_row',
+                   locals: {:generic_name=>drug.generic_name,
+                            :strength_form=>drug.strength,
+                            :brand=>drug.brand_name,
+                            :instructions=>drug.instructions,
+                            :purpose=>drug.purpose,
+                            :am=>{:check=>drug.am_check,:instruction=>drug.am_time},
+                            :noon=>{:check=>drug.noon_check,:instruction=>drug.noon_time},
+                            :supper=>{:check=>drug.supper_check,:instruction=>drug.supper_time},
+                            :bed_time=>{:check=>drug.bedtime_check,:instruction=>drug.bedtime_time} }
+  .span12
+    %p{data: {editable: true, type: 'textarea', inputclass: 'input-large'}}= @prescription.note
+
+

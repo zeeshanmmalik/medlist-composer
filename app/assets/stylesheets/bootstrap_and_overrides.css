@@ -100,3 +100,8 @@ td.dyno-action {
 
 .row table tr.odd td { background-color: #e6edf6; }
 .row table tr th.control { width: 16px; }
+
+.row div.field{
+    float: left;
+    margin-right: 40px;
+}

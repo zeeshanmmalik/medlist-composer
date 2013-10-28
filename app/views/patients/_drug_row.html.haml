@@ -1,0 +1,31 @@
+%tr
+  %td.dyno-action
+    = image_tag 'drag.png', :class => 'drag-handle', :alt =>  'click and drag to rearrange'
+  %td
+    %p{data: {editable: true, type: 'text', inputclass: 'input-medium'}}=generic_name
+    %p{data: {editable: true, type: 'text', inputclass: 'input-medium'}}=strength_form
+    %p.bold{data: {editable: true, type: 'text', inputclass: 'input-medium'}}=brand.blank? ? '':"(#{brand})"
+  %td
+    - if instructions.blank?
+      %p{data: {editable: true, type: 'text', inputclass: 'input-long'}}=''
+    - else
+      - instructions.each do |ins|
+        %p{data: {editable: true, type: 'text', inputclass: 'input-long'}}=ins
+  %td
+    %p{data: {editable: true, type: 'text', inputclass: 'input-medium'}}=purpose
+  %td
+    %p{data: {editable: true, type: 'text', inputclass: 'input-short'}}=am[:check]
+    %p{data: {editable: true, type: 'text', inputclass: 'input-short'}}=am[:instruction]
+  %td
+    %p{data: {editable: true, type: 'text', inputclass: 'input-short'}}=noon[:check]
+    %p{data: {editable: true, type: 'text', inputclass: 'input-short'}}=noon[:instruction]
+  %td
+    %p{data: {editable: true, type: 'text', inputclass: 'input-short'}}=supper[:check]
+    %p{data: {editable: true, type: 'text', inputclass: 'input-short'}}=supper[:instruction]
+  %td
+    %p{data: {editable: true, type: 'text', inputclass: 'input-short'}}=bed_time[:check]
+    %p{data: {editable: true, type: 'text', inputclass: 'input-short'}}=bed_time[:instruction]
+  %td.dyno-action
+    = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
+  %td.dyno-action
+    = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 

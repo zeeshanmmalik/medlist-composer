@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028122649) do
+ActiveRecord::Schema.define(version: 20131028191341) do
 
   create_table "drugs", force: true do |t|
     t.string   "generic_name"
@@ -91,6 +91,9 @@ ActiveRecord::Schema.define(version: 20131028122649) do
     t.integer  "base_template_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "alergies"
+    t.string   "note"
+    t.string   "base_template_type"
   end
 
   add_index "prescriptions", ["base_template_id"], name: "index_prescriptions_on_base_template_id"
@@ -103,6 +106,8 @@ ActiveRecord::Schema.define(version: 20131028122649) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "note"
+    t.string   "program"
   end
 
   add_index "templates", ["id"], name: "index_templates_on_id", unique: true

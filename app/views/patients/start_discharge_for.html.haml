@@ -1,6 +1,6 @@
 .row
   .span12
-    %h1 Listing templates
+    %h1 Select Template
 
   .span12
     %table.table.table-striped
@@ -10,21 +10,16 @@
         %th Created At
         %th Last Updated At
         %th Program
-        %th
-        %th
-        %th
+        %th 
 
-      - @templates.each do |template|
+      - @base_templates.each do |template|
         %tr{class: cycle('odd', 'even')}
           %td= template.name
           %td= template.drugs.length
           %td= template.created_at
           %td= template.updated_at
           %td= template.program
-          %td= link_to 'Show', template
-          %td= link_to 'Edit', edit_template_path(template)
-          %td= link_to 'Destroy', template, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          %td= link_to 'Select', create_prescription_for_patient_path(@patient,template_id: template.id), class: 'btn btn-small btn-primary'
 
-    %br
-
-    = link_to 'New Template', new_template_path
+          
+          

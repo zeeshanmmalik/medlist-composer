@@ -4,4 +4,8 @@ class Pharmacist < ActiveRecord::Base
   devise :database_authenticatable, :rememberable
          #, :registerable, :recoverable, :rememberable, :trackable, :validatable
   has_many :patients
+
+  def name
+    "#{last_name.capitalize}, #{first_name.capitalize}"    
+  end
 end
