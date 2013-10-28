@@ -28,7 +28,7 @@
 = content_for :page_css do
   %link{href: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css", rel: "stylesheet"}
     
-.row
+.row.x-resizeable
   .span5
     %p.bold Toronto General Hospital
     %p.bold Department of Pharmacy
@@ -43,7 +43,7 @@
     %p.bold
       Pharmacist:
       %span{data: {editable: true, type: 'text', inputclass: 'input-long'}}=''
-.row
+.row.x-resizeable
   .span12
     %p
       %strong Medication Allergies:
