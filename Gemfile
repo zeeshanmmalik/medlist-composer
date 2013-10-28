@@ -30,7 +30,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'haml-rails'
+gem 'haml'
 gem "twitter-bootstrap-rails"
+
+gem "devise"
     
 group :test, :development do
   gem "rspec-rails", "~> 2.0"

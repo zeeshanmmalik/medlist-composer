@@ -13,6 +13,16 @@
       $.fn.editable.defaults.defaultValue = '...';
       $.fn.editable.defaults.emptytext = '...';
       $('[data-editable]').editable();
+
+      if($.cookie('TEXT_SIZE')) {
+        $('body').addClass($.cookie('TEXT_SIZE')); 
+      }
+      $('.resizer a').click(function() {
+        var textSize = $(this).parent().attr('class');
+        $('body').removeClass('small medium large').addClass(textSize);
+        $.cookie('TEXT_SIZE',textSize, { path: '/', expires: 10000 });
+        return false;
+      });
     });
   
 = content_for :page_css do
@@ -39,10 +49,18 @@
       %strong Medication Allergies:
       %span{data: {editable: true, type: 'textarea', inputclass: 'input-large'}} no known drug allergies
   .span12
+    %ul.resizer{style:'float:right'}
+      %li.small
+        %a{href: "#"} A
+      %li.medium
+        %a{href: "#"} A
+      %li.large
+        %a{href: "#"} A
+  .span12
     %table#drugs_table.table.table-bordered.table-hover.table-condensed
       %thead
         %tr
-          %th
+          %th.control
           %th DRUG
           %th INSTRUCTIONS
           %th PURPOSEP
@@ -50,8 +68,8 @@
           %th NOON
           %th SUPPER
           %th BED-TIME
-          %th
-          %th
+          %th.control
+          %th.control
       %tbody
         = render partial: 'drug_row',
                  locals: {:generic_name=>'Cyclosporine',
