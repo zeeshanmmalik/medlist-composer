@@ -1,0 +1,1 @@
+json.extract! @drug, :generic_name, :strength, :brand_name, :purpose, :instruction_id, :am_check, :am_time, :noon_check, :noon_time, :supper_check, :supper_time, :bedtime_check, :bedtime_time, :created_at, :updated_at

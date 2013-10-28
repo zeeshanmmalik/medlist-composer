@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Patient:
+  = @prescription.patient
+%p
+  %b Pharmacist:
+  = @prescription.pharmacist
+%p
+  %b Physician:
+  = @prescription.physician
+%p
+  %b Base template:
+  = @prescription.base_template_id
+
+= link_to 'Edit', edit_prescription_path(@prescription)
+\|
+= link_to 'Back', prescriptions_path

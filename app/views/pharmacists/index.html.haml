@@ -1,0 +1,21 @@
+%h1 Listing pharmacists
+
+%table
+  %tr
+    %th First name
+    %th Last name
+    %th
+    %th
+    %th
+
+  - @pharmacists.each do |pharmacist|
+    %tr
+      %td= pharmacist.first_name
+      %td= pharmacist.last_name
+      %td= link_to 'Show', pharmacist
+      %td= link_to 'Edit', edit_pharmacist_path(pharmacist)
+      %td= link_to 'Destroy', pharmacist, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Pharmacist', new_pharmacist_path

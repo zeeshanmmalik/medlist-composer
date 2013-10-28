@@ -1,0 +1,25 @@
+%h1 Listing prescriptions
+
+%table
+  %tr
+    %th Patient
+    %th Pharmacist
+    %th Physician
+    %th Base template
+    %th
+    %th
+    %th
+
+  - @prescriptions.each do |prescription|
+    %tr
+      %td= prescription.patient
+      %td= prescription.pharmacist
+      %td= prescription.physician
+      %td= prescription.base_template_id
+      %td= link_to 'Show', prescription
+      %td= link_to 'Edit', edit_prescription_path(prescription)
+      %td= link_to 'Destroy', prescription, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Prescription', new_prescription_path

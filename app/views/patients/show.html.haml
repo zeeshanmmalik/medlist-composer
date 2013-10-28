@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b First name:
+  = @patient.first_name
+%p
+  %b Last name:
+  = @patient.last_name
+%p
+  %b Mrn:
+  = @patient.mrn
+%p
+  %b Date of birth:
+  = @patient.date_of_birth
+%p
+  %b Program:
+  = @patient.program
+%p
+  %b Admission date:
+  = @patient.admission_date
+%p
+  %b Discharge date:
+  = @patient.discharge_date
+%p
+  %b Pharmacist:
+  = @patient.pharmacist_id
+
+= link_to 'Edit', edit_patient_path(@patient)
+\|
+= link_to 'Back', patients_path

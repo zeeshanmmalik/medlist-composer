@@ -1,0 +1,45 @@
+%p#notice= notice
+
+%p
+  %b Generic name:
+  = @drug.generic_name
+%p
+  %b Strength:
+  = @drug.strength
+%p
+  %b Brand name:
+  = @drug.brand_name
+%p
+  %b Purpose:
+  = @drug.purpose
+%p
+  %b Instruction:
+  = @drug.instruction
+%p
+  %b Am check:
+  = @drug.am_check
+%p
+  %b Am time:
+  = @drug.am_time
+%p
+  %b Noon check:
+  = @drug.noon_check
+%p
+  %b Noon time:
+  = @drug.noon_time
+%p
+  %b Supper check:
+  = @drug.supper_check
+%p
+  %b Supper time:
+  = @drug.supper_time
+%p
+  %b Bedtime check:
+  = @drug.bedtime_check
+%p
+  %b Bedtime time:
+  = @drug.bedtime_time
+
+= link_to 'Edit', edit_drug_path(@drug)
+\|
+= link_to 'Back', drugs_path

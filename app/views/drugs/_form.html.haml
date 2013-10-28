@@ -1,0 +1,49 @@
+= form_for @drug do |f|
+  - if @drug.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@drug.errors.count, "error")} prohibited this drug from being saved:"
+      %ul
+        - @drug.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :generic_name
+    = f.text_field :generic_name
+  .field
+    = f.label :strength
+    = f.text_field :strength
+  .field
+    = f.label :brand_name
+    = f.text_field :brand_name
+  .field
+    = f.label :purpose
+    = f.text_field :purpose
+  .field
+    = f.label :instruction
+    = f.text_field :instruction
+  .field
+    = f.label :am_check
+    = f.text_field :am_check
+  .field
+    = f.label :am_time
+    = f.text_field :am_time
+  .field
+    = f.label :noon_check
+    = f.text_field :noon_check
+  .field
+    = f.label :noon_time
+    = f.text_field :noon_time
+  .field
+    = f.label :supper_check
+    = f.text_field :supper_check
+  .field
+    = f.label :supper_time
+    = f.text_field :supper_time
+  .field
+    = f.label :bedtime_check
+    = f.text_field :bedtime_check
+  .field
+    = f.label :bedtime_time
+    = f.text_field :bedtime_time
+  .actions
+    = f.submit 'Save'

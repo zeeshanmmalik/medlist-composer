@@ -1,0 +1,16 @@
+= form_for @pharmacist do |f|
+  - if @pharmacist.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@pharmacist.errors.count, "error")} prohibited this pharmacist from being saved:"
+      %ul
+        - @pharmacist.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :first_name
+    = f.text_field :first_name
+  .field
+    = f.label :last_name
+    = f.text_field :last_name
+  .actions
+    = f.submit 'Save'

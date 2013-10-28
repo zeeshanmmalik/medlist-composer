@@ -1,0 +1,43 @@
+%h1 Listing drugs
+
+%table
+  %tr
+    %th Generic name
+    %th Strength
+    %th Brand name
+    %th Purpose
+    %th Instruction
+    %th Am check
+    %th Am time
+    %th Noon check
+    %th Noon time
+    %th Supper check
+    %th Supper time
+    %th Bedtime check
+    %th Bedtime time
+    %th
+    %th
+    %th
+
+  - @drugs.each do |drug|
+    %tr
+      %td= drug.generic_name
+      %td= drug.strength
+      %td= drug.brand_name
+      %td= drug.purpose
+      %td= drug.instruction
+      %td= drug.am_check
+      %td= drug.am_time
+      %td= drug.noon_check
+      %td= drug.noon_time
+      %td= drug.supper_check
+      %td= drug.supper_time
+      %td= drug.bedtime_check
+      %td= drug.bedtime_time
+      %td= link_to 'Show', drug
+      %td= link_to 'Edit', edit_drug_path(drug)
+      %td= link_to 'Destroy', drug, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Drug', new_drug_path

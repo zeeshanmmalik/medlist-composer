@@ -1,0 +1,24 @@
+.row{style: 'padding-top:100px;'}
+  .span7
+    %h3 Welcome to MedList Composer App!
+    %h5 Complete discharge medication list for transplant patients!
+  .span5
+
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      %fieldset
+        %legend Sign in
+        .control-group
+          .control-label= f.label :email
+          .controls
+            = f.email_field :email, autofocus: true, placeholder: 'Enter your email', class: 'input-xlarge'
+        .control-group
+          .control-lable= f.label :password
+          .controls
+            = f.password_field :password, placeholder: 'Enter your password', class: 'input-xlarge'
+        - if devise_mapping.rememberable?
+          .control-group
+            .controls
+              = f.check_box :remember_me, style: 'float:left; margin-top:24px;'
+              = f.label :remember_me, style: 'padding: 20px 0 0 6px;margin-right:66px;float:left;'
+              = f.submit "Sign in", class: 'btn btn-large'
+    = render "devise/shared/links"

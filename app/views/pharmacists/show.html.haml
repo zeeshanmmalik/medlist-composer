@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b First name:
+  = @pharmacist.first_name
+%p
+  %b Last name:
+  = @pharmacist.last_name
+
+= link_to 'Edit', edit_pharmacist_path(@pharmacist)
+\|
+= link_to 'Back', pharmacists_path
