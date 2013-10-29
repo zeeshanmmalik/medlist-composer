@@ -69,6 +69,19 @@ class PrescriptionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prescription_params
-      params.require(:prescription).permit(:patient_id, :pharmacist_id, :physician, :base_template_id)
+      params.require(:prescription).permit(:pateint_id,:pharmacist_id, :pyshician, :base_template_id, :allergies, :note,
+                                            drugs_attributes: [:id,
+                                                               :generic_name,
+                                                               :strength,
+                                                               :brand_name,
+                                                               :purpose,
+                                                               :am_check, :am_time,
+                                                               :noon_check, :noon_time,
+                                                               :supper_check, :supper_time,
+                                                               :bedtime_check, :bedtime_time,
+                                                               :_destroy,
+                                                               instructions_attributes: [:id,
+                                                                                         :line,
+                                                                                         :_destroy]])
     end
 end

@@ -9,7 +9,7 @@ DischargeMedlistComposer::Application.routes.draw do
   resources :patients do
     member do
       get 'start_discharge_for'
-      get 'create_prescription_for'
+      post 'create_prescription_for'
     end
   end
 

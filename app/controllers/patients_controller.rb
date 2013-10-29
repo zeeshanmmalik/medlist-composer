@@ -37,7 +37,10 @@ class PatientsController < ApplicationController
     @prescription.pharmacist_id = current_pharmacist.id
     @prescription.save
     @template.drugs.each do |drug|
-      @prescription.drugs.create(drug.as_json)
+      pd = @prescription.drugs.create(drug.as_json)
+      drug.instructions.each do |ins|
+        pd.instructions.create(ins.as_json)
+      end
     end
 
   end

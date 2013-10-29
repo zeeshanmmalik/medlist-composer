@@ -19,7 +19,8 @@
           %td= template.created_at
           %td= template.updated_at
           %td= template.program
-          %td= link_to 'Select', create_prescription_for_patient_path(@patient,template_id: template.id), class: 'btn btn-small btn-primary'
+          / For some reason get request did not render javascript for this page
+          %td= link_to 'Select', create_prescription_for_patient_path(@patient,template_id: template.id), class: 'btn btn-small btn-primary', method: :post
 
           
           

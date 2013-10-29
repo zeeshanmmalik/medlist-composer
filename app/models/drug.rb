@@ -1,6 +1,6 @@
 class Drug < ActiveRecord::Base
   belongs_to :drugable, polymorphic: true
-  has_many :instructions
+  has_many :instructions, dependent: :destroy
   accepts_nested_attributes_for :instructions, allow_destroy: true
 
   def as_json(*args)
@@ -9,7 +9,6 @@ class Drug < ActiveRecord::Base
       strength: strength,
       brand_name: brand_name,
       purpose: purpose,
-      instructions: instructions.as_json,
       am_check: am_check,
       am_time: am_time,
       noon_check: noon_check,

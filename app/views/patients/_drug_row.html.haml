@@ -10,7 +10,7 @@
       %p{data: {editable: true, type: 'text', inputclass: 'input-long'}}=''
     - else
       - instructions.each do |ins|
-        %p{data: {editable: true, type: 'text', inputclass: 'input-long'}}=ins
+        %p{data: {editable: true, type: 'text', inputclass: 'input-long'}}=ins.line
   %td
     %p{data: {editable: true, type: 'text', inputclass: 'input-medium'}}=purpose
   %td
