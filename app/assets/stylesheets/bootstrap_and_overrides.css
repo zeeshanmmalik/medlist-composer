@@ -14,8 +14,9 @@ body {
 
 ul.resizer { float:right; }
 ul.resizer li { display:inline; }
-.medium { font-size: 16px; line-height: 22px; }
-.large { font-size: 20px; line-height: 26px; }
+
+ul.resizer .medium { font-size: 16px; line-height: 22px; }
+ul.resizer .large { font-size: 20px; line-height: 26px; }
 
 .x-resizeable h1 { font-size: 30px; line-height: 36px; }
 .medium .x-resizeable h1 { font-size: 34px; line-height: 40px; }
@@ -30,18 +31,24 @@ ul.resizer li { display:inline; }
 .large .x-resizeable  h3 { font-size: 26px; line-height: 32px; }
 
 .x-resizeable span,
-.x-resizeable p {
+.x-resizeable p,
+.x-resizeable th,
+.x-resizeable td {
     font-size: 13px; line-height: 18px;
 }
 
 .medium .x-resizeable p,
-.medium .x-resizeable span{
-    font-size: 20px; line-height: 25px;
+.medium .x-resizeable span,
+.medium .x-resizeable th,
+.medium .x-resizeable td {
+    font-size: 16px; line-height: 21px;
 }
 
 .large .x-resizeable p,
-.large .x-resizeable span{
-    font-size: 26px; line-height: 32px;
+.large .x-resizeable span,
+.large .x-resizeable th,
+.large .x-resizeable td {
+    font-size: 20px; line-height: 25px;
 }
 
 .footer {
