@@ -14,6 +14,12 @@
 //= require jquery_ujs
 //= require jquery.cookie
 //= require twitter/bootstrap
+//= require bootstrap-datepicker
 //= require jquery_nested_form
 //= require turbolinks
 // require_tree .
+
+
+$(document).ready(function(){
+  $('[data-behaviour~=datepicker]').datepicker();
+})

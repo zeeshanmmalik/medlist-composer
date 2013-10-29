@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'haml-rails'
 gem 'haml'
 gem "twitter-bootstrap-rails"
+gem 'bootstrap-datepicker-rails'  
 gem 'nested_form' 
 
 gem "devise"

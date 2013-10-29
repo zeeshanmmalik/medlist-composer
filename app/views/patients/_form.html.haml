@@ -12,24 +12,34 @@
   .field
     = f.label :last_name
     = f.text_field :last_name
+  .clearfix
   .field
     = f.label :mrn
     = f.text_field :mrn
   .field
     = f.label :date_of_birth
-    = f.date_select :date_of_birth
+    .input-append.date
+      = f.text_field :date_of_birth, data: {behaviour: 'datepicker'}
+      %span.add-on
+        %i.icon-th
+  .clearfix
   .field
     = f.label :program
     = f.text_field :program
   .field
     = f.label :admission_date
-    = f.datetime_select :admission_date
+    .input-append.date
+      = f.text_field :admission_date, class: 'span2', data: {behaviour: 'datepicker'}
+      %span.add-on
+        %i.icon-th
+  .clearfix
   /
     .field
       = f.label :discharge_date
       = f.datetime_select :discharge_date
-  .field
-    = f.label :pharmacist_id
-    = f.number_field :pharmacist_id
+    .field
+      = f.label :pharmacist_id
+      = f.number_field :pharmacist_id
+  .clearfix
   .actions
     = f.submit 'Save'
