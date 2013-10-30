@@ -2,14 +2,91 @@
   -# %script{src: "https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js", type: "text/javascript"}
   -# %script{src: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js", type: "text/javascript"}
   = javascript_include_tag 'jquery.dynotable.js'
+  = javascript_include_tag 'prescription_template.js'
+  = javascript_include_tag 'drugs_autocomplete.js'
 
   :javascript
+    var drugs_data = [
+                   {
+                       'label': '5-aminosalicylic acid',
+                       'value': '5-aminosalicylic acid [5-ASA]',
+                       'ottrn': '5-aminosalicylic acid',
+                       'ufn': '5-aminosalicylic acid [5-ASA]',
+                       'strength': '400 mg Tablets',
+                       'brand': 'Asacol',
+                       'instruction': 'Take 400 mg (1 tablets) twice daily ',
+                       'purpose': 'For ulcerative colitis',
+                       'am_check': 'x',
+                       'am_time': '',
+                       'noon_check': '',
+                       'noon_time': '',
+                       'supper_check': '',
+                       'supper_time': '',
+                       'bedtime_check': 'x',
+                       'bedtime_time': ''
+                   },
+                   {
+                       'label': 'Acetaminophen',
+                       'value': 'acetaminophen',
+                       'ottrn': 'Acetaminophen',
+                       'ufn': 'acetaminophen',
+                       'strength': '325 mg tablets',
+                       'brand': 'Tylenol',
+                       'instruction': 'Take 325-650mg (1-2 tablets) every 4-6 hours as needed',
+                       'purpose': 'For pain and fever',
+                       'am_check': '',
+                       'am_time': '',
+                       'noon_check': '',
+                       'noon_time': '',
+                       'supper_check': '',
+                       'supper_time': '',
+                       'bedtime_check': '',
+                       'bedtime_time': ''
+                   },
+                   {
+                       'label': 'acetaminophen',
+                       'value': 'acetaminophen',
+                       'ottrn': 'Acetaminophen',
+                       'ufn': 'acetaminophen',
+                       'strength': '500 mg tablets',
+                       'brand': 'Tylenol extra-strength',
+                       'instruction': 'Take 1000mg ( 2 tablets) every 6 hours as needed',
+                       'purpose': 'For pain and fever',
+                       'am_check': '',
+                       'am_time': '',
+                       'noon_check': '',
+                       'noon_time': '',
+                       'supper_check': '',
+                       'supper_time': '',
+                       'bedtime_check': '',
+                       'bedtime_time': ''
+                   }    
+                 ];
+
     $(document).ready(function(){
        $('#drugs_table').dynoTable();
         
        $.fn.editable.defaults.mode = 'inline';
        $.fn.editable.defaults.defaultValue = '';
        $.fn.editable.defaults.emptytext = '...';
+
+
+       $('[data-editable]').each(function() {
+                               var data_name = $(this).attr('data-name');
+                               if( data_name == 'generic_name' ||
+                                   data_name == 'strength' ||
+                                   data_name == 'brand_name' ) {
+                                     $(this).on('shown', function(e, editable) {
+                                       console.log("in here");
+                                       console.log($(this));
+                                       console.log($(this).next().children().find('input:first'));
+                                       $(this).next().children().find('input:first').autocomplete({
+                                         appentTo: $(this),
+                                         source: drugs_data
+                                       });
+                                     });
+                               }
+                             });
        $('[data-editable]').editable();
     
        if($.cookie('TEXT_SIZE')) {
@@ -27,7 +104,7 @@
   -# %link{href: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css", rel: "stylesheet"}
   = stylesheet_link_tag 'bootstrap-editable.css'
 
-= nested_form_for @prescription do |f|
+= nested_form_for @prescription, { onsubmit: "return savePrescription();"} do |f|
   .row.x-resizeable
     .span5
       %p.bold Toronto General Hospital
@@ -83,7 +160,7 @@
             %th BED-TIME
             %th.control
             %th.control
-        %tbody
+        %tbody.drugs
           - @prescription.drugs.each do |drug|
             = render partial: 'drug_row', locals: { drug: drug }
             -# {:generic_name=>drug.generic_name,
