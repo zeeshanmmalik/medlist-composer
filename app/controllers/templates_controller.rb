@@ -42,7 +42,7 @@ class TemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to @template, notice: 'Template was successfully updated.' }
+        format.html { redirect_to edit_template_path(@template), notice: 'Template was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
