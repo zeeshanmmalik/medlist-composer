@@ -15,6 +15,8 @@
 //= require jquery.cookie
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
+//= require bootstrap-editable
+//= require bootstrap-nested-editable-rails
 //= require jquery_nested_form
 //= require turbolinks
 // require_tree .
