@@ -106,9 +106,24 @@ td.dyno-action {
 
 
 .row table tr.odd td { background-color: #e6edf6; }
+
+/* fixed width for control columns to avoid resizing when text is resized */
 .row table tr th.control { width: 16px; }
 
 .row div.field{
     float: left;
     margin-right: 40px;
 }
+
+/*----------------------------------------
+  ui-autocomplete css over-written start
+------------------------------------------*/
+
+ul.ui-autocomplete .ui-menu-item {
+    padding: 5px 0;
+    border-bottom: 1px black dotted;
+}
+
+/*----------------------------------------
+  ui-autocomplete css over-written end
+------------------------------------------*/

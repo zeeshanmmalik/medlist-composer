@@ -4,55 +4,55 @@
   %td
     %p{data: {editable: true, type: 'text', inputclass: 'input-medium',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'generic_name'}}= drug.generic_name
+              name: 'generic_name', initval: "#{drug.generic_name}"}}= drug.generic_name
     %p{data: {editable: true, type: 'text', inputclass: 'input-medium',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'strength'}}= drug.strength
+              name: 'strength', initval: "#{drug.strength}"}}= drug.strength
     %p.bold{data: {editable: true, type: 'text', inputclass: 'input-medium',
                    resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-                   name: 'brand_name'}}= drug.brand_name.blank? ? '':"(#{drug.brand_name})"
+                   name: 'brand_name', initval: "#{drug.brand_name}"}}= drug.brand_name.blank? ? '':"(#{drug.brand_name})"
   %td
     - if drug.instructions.blank?
       %p{data: {editable: true, type: 'text', inputclass: 'input-long',
                 resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-                nested_2: 'instructions', nnid: "new", name: '_name'}}=''
+                nested_2: 'instructions', nnid: "new", name: '_name', initval: "#{''}"}}=''
     - else
       - drug.instructions.each do |ins|
         %p{data: {editable: true, type: 'text', inputclass: 'input-long',
                 resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-                nested_2: 'instructions', nnid: "#{ins.id}", name: '_name'}}=ins.line
+                nested_2: 'instructions', nnid: "#{ins.id}", name: '_name', initval: "#{ins.line}"}}=ins.line
   %td
     %p{data: {editable: true, type: 'text', inputclass: 'input-medium',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'purpose'}}= drug.purpose
+              name: 'purpose', initval: "#{drug.purpose}"}}= drug.purpose
   %td
     %p{data: {editable: true, type: 'text', inputclass: 'input-short',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'am_check'}}= drug.am_check
+              name: 'am_check', initval: "#{drug.am_check}"}}= drug.am_check
     %p{data: {editable: true, type: 'text', inputclass: 'input-short',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'am_time'}}= drug.am_time
+              name: 'am_time', initval: "#{drug.am_time}"}}= drug.am_time
   %td
     %p{data: {editable: true, type: 'text', inputclass: 'input-short',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'noon_check'}}= drug.noon_check
+              name: 'noon_check', initval: "#{drug.noon_check}"}}= drug.noon_check
     %p{data: {editable: true, type: 'text', inputclass: 'input-short',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'noon_time'}}= drug.noon_time
+              name: 'noon_time', initval: "#{drug.noon_time}"}}= drug.noon_time
   %td
     %p{data: {editable: true, type: 'text', inputclass: 'input-short',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'supper_check'}}= drug.supper_check
+              name: 'supper_check', initval: "#{drug.supper_check}"}}= drug.supper_check
     %p{data: {editable: true, type: 'text', inputclass: 'input-short',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'supper_time'}}= drug.supper_time
+              name: 'supper_time', initval: "#{drug.supper_time}"}}= drug.supper_time
   %td
     %p{data: {editable: true, type: 'text', inputclass: 'input-short',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'bedtime_check'}}= drug.bedtime_check
+              name: 'bedtime_check', initval: "#{drug.bedtime_check}"}}= drug.bedtime_check
     %p{data: {editable: true, type: 'text', inputclass: 'input-short',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
-              name: 'bedtime_time'}}= drug.bedtime_time
+              name: 'bedtime_time', initval: "#{drug.bedtime_time}"}}= drug.bedtime_time
   %td.dyno-action
     = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
   %td.dyno-action

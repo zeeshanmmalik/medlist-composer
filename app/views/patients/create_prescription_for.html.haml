@@ -11,7 +11,7 @@
                        'label': '5-aminosalicylic acid',
                        'value': '5-aminosalicylic acid [5-ASA]',
                        'ottrn': '5-aminosalicylic acid',
-                       'ufn': '5-aminosalicylic acid [5-ASA]',
+                       'pfn': '5-aminosalicylic acid [5-ASA]',
                        'strength': '400 mg Tablets',
                        'brand': 'Asacol',
                        'instruction': 'Take 400 mg (1 tablets) twice daily ',
@@ -29,7 +29,7 @@
                        'label': 'Acetaminophen',
                        'value': 'acetaminophen',
                        'ottrn': 'Acetaminophen',
-                       'ufn': 'acetaminophen',
+                       'pfn': 'acetaminophen',
                        'strength': '325 mg tablets',
                        'brand': 'Tylenol',
                        'instruction': 'Take 325-650mg (1-2 tablets) every 4-6 hours as needed',
@@ -47,7 +47,7 @@
                        'label': 'acetaminophen',
                        'value': 'acetaminophen',
                        'ottrn': 'Acetaminophen',
-                       'ufn': 'acetaminophen',
+                       'pfn': 'acetaminophen',
                        'strength': '500 mg tablets',
                        'brand': 'Tylenol extra-strength',
                        'instruction': 'Take 1000mg ( 2 tablets) every 6 hours as needed',
@@ -63,6 +63,70 @@
                    }    
                  ];
 
+
+    function resetEditableValues( $tr_children, $tr ){
+      var item = {};
+      item.pfn = $tr_children.find('[data-name="generic_name"]:first').attr('data-initval');
+      item.strength = $tr_children.find('[data-name="strength"]:first').attr('data-initval');
+      item.brand = $tr_children.find('[data-name="brand_name"]:first').attr('data-initval');
+      item.purpose = $tr_children.find('[data-name="purpose"]:first').attr('data-initval');
+      item.instruction = $tr_children.find('[data-nested-2="instructions"]:first').attr('data-initval');
+      item.am_check = $tr_children.find('[data-name="am_check"]:first').attr('data-initval');
+      item.am_time = $tr_children.find('[data-name="am_time"]:first').attr('data-initval');
+      item.noon_check = $tr_children.find('[data-name="noon_check"]:first').attr('data-initval');
+      item.noon_time = $tr_children.find('[data-name="noon_time"]:first').attr('data-initval');
+      item.supper_check = $tr_children.find('[data-name="supper_check"]:first').attr('data-initval');
+      item.supper_time = $tr_children.find('[data-name="supper_time"]:first').attr('data-initval');
+      item.bedtime_check = $tr_children.find('[data-name="bedtime_check"]:first').attr('data-initval');
+      item.bedtime_time = $tr_children.find('[data-name="bedtime_time"]:first').attr('data-initval');
+
+      console.log(item);
+       
+      applyEditableValues( $tr_children, item, $tr );
+    }
+
+    function setEditableValues( $tr_children, item, $tr ){
+      $tr_children.find('[data-name="generic_name"]:first').text(item.pfn);
+      $tr_children.find('[data-name="strength"]:first').text(item.strength);
+      $tr_children.find('[data-name="brand_name"]:first').text("("+item.brand+")");
+      $tr_children.find('[data-name="purpose"]:first').text(item.purpose);
+      $tr_children.find('[data-nested-2="instructions"]:first').text(item.instruction);
+      $tr_children.find('[data-name="am_check"]:first').text(item.am_check);
+      $tr_children.find('[data-name="am_time"]:first').text(item.am_time);
+      $tr_children.find('[data-name="noon_check"]:first').text(item.noon_check);
+      $tr_children.find('[data-name="noon_time"]:first').text(item.noon_time);
+      $tr_children.find('[data-name="supper_check"]:first').text(item.supper_check);
+      $tr_children.find('[data-name="supper_time"]:first').text(item.supper_time);
+      $tr_children.find('[data-name="bedtime_check"]:first').text(item.bedtime_check);
+      $tr_children.find('[data-name="bedtime_time"]:first').text(item.bedtime_time);
+    }
+
+    function updateEditableInitValues( $tr_children, item ){
+      $tr_children.find('[data-name="generic_name"]:first').attr('data-initval',item.pfn);
+      $tr_children.find('[data-name="strength"]:first').attr('data-initval',item.strength);
+      $tr_children.find('[data-name="brand_name"]:first').attr('data-initval',item.brand);
+      $tr_children.find('[data-name="purpose"]:first').attr('data-initval',item.purpose);
+      $tr_children.find('[data-nested-2="instructions"]:first').attr('data-initval',item.instruction);
+      $tr_children.find('[data-name="am_check"]:first').attr('data-initval',item.am_check);
+      $tr_children.find('[data-name="am_time"]:first').attr('data-initval',item.am_time);
+      $tr_children.find('[data-name="noon_check"]:first').attr('data-initval',item.noon_check);
+      $tr_children.find('[data-name="noon_time"]:first').attr('data-initval',item.noon_time);
+      $tr_children.find('[data-name="supper_check"]:first').attr('data-initval',item.supper_check);
+      $tr_children.find('[data-name="supper_time"]:first').attr('data-initval',item.supper_time);
+      $tr_children.find('[data-name="bedtime_check"]:first').attr('data-initval',item.bedtime_check);
+      $tr_children.find('[data-name="bedtime_time"]:first').attr('data-initval',item.bedtime_time);
+    }
+
+    function applyEditableValues( $tr_children, item, $tr){
+      setEditableValues($tr_children, item, $tr);
+      updateEditableInitValues($tr_children, item);
+      $tr.find('[data-editable]').each( function() {
+        $(this).editable('destroy');
+      });
+      $tr.find('[data-editable]').editable();
+    }
+
+
     $(document).ready(function(){
        $('#drugs_table').dynoTable();
         
@@ -72,19 +136,90 @@
 
 
        $('[data-editable]').each(function() {
+                               var current_input_this;
                                var data_name = $(this).attr('data-name');
                                if( data_name == 'generic_name' ||
                                    data_name == 'strength' ||
                                    data_name == 'brand_name' ) {
                                      $(this).on('shown', function(e, editable) {
-                                       console.log("in here");
-                                       console.log($(this));
-                                       console.log($(this).next().children().find('input:first'));
-                                       $(this).next().children().find('input:first').autocomplete({
+                                       var editable = $(this).data('editable');
+                                       //console.log(editable);
+                                       editable.input.$input.autocomplete({
+                                         //$(this).next().children().find('input:first').autocomplete({
                                          appentTo: $(this),
-                                         source: drugs_data
+                                         //source: drugs_data,
+                                         focus: function( event, ui ) {
+                                           //console.log("in focus");
+                                           if( data_name == 'strength' || data_name == 'brand_name' ){
+                                             $( this ).closest('tr').find('[data-name="generic_name"]:first').text(ui.item.label);
+                                           }else{
+                                             // only update the item if it's generic_name
+                                             $( this ).val( ui.item.label );
+                                           }
+                                           var $tr = $( this ).closest('tr');
+                                           var $tr_children = $( this ).closest('tr').children();
+                                           //console.log("half way through");
+                                           //console.log($tr_children.find('[data-name="strength"]:first'));
+                                           setEditableValues($tr_children, ui.item, $tr);
+                                           return false;
+                                         },
+                                         select: function( event, ui ) {
+                                           //console.log("in select ....");
+                                           if( data_name == 'strength' || data_name == 'brand_name' ){
+                                             $( this ).closest('tr').find('[data-name="generic_name"]:first').text(ui.item.label);
+                                           }else{
+                                             // only update the item if it's generic_name
+                                             $( this ).val( ui.item.label );
+                                           }
+                                           var $tr = $( this ).closest('tr');
+                                           var $tr_children = $( this ).closest('tr').children();
+                                           applyEditableValues($tr_children, ui.item, $tr);
+                                           // Submit the form to remove editable after selection
+                                           editable.input.$input.closest('form').submit(function(e){ e.preventDefault(); });
+                                           return false;
+                                         },
+                                         create: function( event, ui ) {
+                                           current_input_this = this;
+                                         },
+                                         source: function( request, response ) {
+                                           console.log($(current_input_this));
+                                           var term = request.term;
+                                           if( data_name == 'strength' || data_name == 'brand_name' ){
+                                             var drug = $(current_input_this).closest('tr').find('[data-name="generic_name"]:first').attr('data-initval');
+                                             console.log(drug);
+                                             term = drug;
+                                           }
+
+                                           console.log(term);                                           
+                                           var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
+                                           
+                                           response($.map(drugs_data, function(el) {
+                                             console.log(term + "  |  " + el.pfn);
+                                             if (matcher.test(el.pfn)) {
+                                               return el;
+                                             }
+                                           }));
+                                         }
+                                       })
+                                       .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+                                         return $( "<li>" )
+                                         .append( "<a>" + item.pfn + " | OTTR: " + item.ottrn +
+                                                  "<br><small>" + item.strength + " | " + item.brand + " | " + item.purpose  + "</small>" +
+                                                  "<br><small>" + item.instruction + "</small></a>" )
+                                         .appendTo( ul );
+                                       };
+
+                                       editable.input.$input.on('keydown.editable', function (e) {
+                                         if (e.which === 27) {
+                                           console.log('in escape ... restore defaults here ...');
+                                           var $tr = $( this ).closest('tr');
+                                           var $tr_children = $( this ).closest('tr').children();
+                                           resetEditableValues($tr_children, $tr);
+                                         }
                                        });
+
                                      });
+
                                }
                              });
        $('[data-editable]').editable();
@@ -112,7 +247,7 @@
       %p.bold Medication List
     .span7
       %p.bold
-        Name:
+        Patient Name:
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'patient', name: 'last_name', url: "/patients/#{@patient.id}"}}= @patient.last_name
         %span= ", "
@@ -122,14 +257,14 @@
         Date:
         %span{data: {editable: true, type: 'date', inputclass: 'input-medium'}}= Date.today
       %p.bold
-        Pharmacist:
+        Pharmacist Name:
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'pharmacist', name: 'last_name', url: "/pharmacists/#{current_pharmacist.id}"}}= current_pharmacist.last_name
         %span= ", "
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'pharmacist', name: 'first_name', url: "/pharmacists/#{@patient.id}"}}= current_pharmacist.first_name        
       %p.bold
-        Physician:
+        Physician Name:
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'prescription', name: 'physician', url: "/prescriptions/#{@prescription.id}"}}= @prescription.physician
   .row.x-resizeable
@@ -153,7 +288,7 @@
             %th.control
             %th DRUG
             %th INSTRUCTIONS
-            %th PURPOSEP
+            %th PURPOSE
             %th AM
             %th NOON
             %th SUPPER
@@ -163,15 +298,7 @@
         %tbody.drugs
           - @prescription.drugs.each do |drug|
             = render partial: 'drug_row', locals: { drug: drug }
-            -# {:generic_name=>drug.generic_name,
-            -#          :strength_form=>drug.strength,
-            -#          :brand=>drug.brand_name,
-            -#          :instructions=>drug.instructions,
-            -#          :purpose=>drug.purpose,
-            -#          :am=>{:check=>drug.am_check,:instruction=>drug.am_time},
-            -#          :noon=>{:check=>drug.noon_check,:instruction=>drug.noon_time},
-            -#          :supper=>{:check=>drug.supper_check,:instruction=>drug.supper_time},
-            -#          :bed_time=>{:check=>drug.bedtime_check,:instruction=>drug.bedtime_time} }
+
     .span12
       %p{data: {editable: true, type: 'text', inputclass: 'input-large',
                      resource: 'prescription', name: 'note', url: "/prescriptions/#{@prescription.id}"}}= @prescription.note
