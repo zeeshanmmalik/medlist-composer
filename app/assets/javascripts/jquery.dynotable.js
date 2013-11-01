@@ -11,7 +11,7 @@
                 cloneClass: '.row-cloner',
                 addRowTemplateId: '#add-template',
                 addRowButtonId: '#add-row',
-                lastRowRemovable: true,
+                lastRowRemovable: false,
                 orderable: true,
                 dragHandleClass: ".drag-handle",
                 insertFadeSpeed: "slow",
