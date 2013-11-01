@@ -37,12 +37,14 @@
             %ul.nav.pull-right
               %li= link_to "Home", patients_path
               %li= link_to "Help", "#"
+              %li= link_to "Patients", patients_path
+              %li= link_to "Templates", templates_path
               - if pharmacist_signed_in?
                 %li= link_to "Sign Out", destroy_pharmacist_session_path, method: :delete
               - else
                 %li= link_to "Sign in", new_pharmacist_session_path
 
-    .container{style: 'min-height: 600px;'}
+    .container
 
       .row
         .span12
@@ -59,4 +61,4 @@
                 %li= link_to "Sign Out", "#"
     
     %footer.footer
-      %p &copy; Company 2013
+      %span &copy; Company 2013
