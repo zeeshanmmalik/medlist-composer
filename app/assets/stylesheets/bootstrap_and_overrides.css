@@ -113,6 +113,11 @@ td.dyno-action {
 .row div.field{
     float: left;
     margin-right: 40px;
+    margin-top: 10px;
+}
+
+.row div.actions{
+    margin-top: 20px;
 }
 
 /*----------------------------------------

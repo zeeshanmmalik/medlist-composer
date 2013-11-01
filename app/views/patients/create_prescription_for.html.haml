@@ -239,7 +239,7 @@
   -# %link{href: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css", rel: "stylesheet"}
   = stylesheet_link_tag 'bootstrap-editable.css'
 
-= nested_form_for @prescription, { onsubmit: "return savePrescription();"} do |f|
+= nested_form_for @prescription do |f|
   .row.x-resizeable
     .span5
       %p.bold Toronto General Hospital

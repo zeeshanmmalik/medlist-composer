@@ -11,9 +11,6 @@
         %th Last Updated At
         %th Program
         %th
-        %th
-        %th
-
       - @templates.each do |template|
         %tr{class: cycle('odd', 'even')}
           %td= template.name
@@ -21,9 +18,10 @@
           %td= template.created_at
           %td= template.updated_at
           %td= template.program
-          %td= link_to 'Show', template
-          %td= link_to 'Edit', edit_template_path(template)
-          %td= link_to 'Destroy', template, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          %td
+            = link_to 'Show', template, class: 'btn btn-mini btn-info'
+            = link_to 'Edit', edit_template_path(template), class: 'btn btn-mini btn-primary'
+            = link_to 'Destroy', template, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-mini btn-danger'
 
     %br
 

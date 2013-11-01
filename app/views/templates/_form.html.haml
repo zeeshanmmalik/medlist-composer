@@ -11,8 +11,10 @@
     = f.text_field :name
   .clearfix
   = f.fields_for :drugs do |df|
-    %fieldset
-      %legend Drug
+    %fieldset{style:"margin-top:20px;"}
+      %legend
+        Drug &nbsp; &nbsp;
+        = df.link_to_remove "Remove this drug", class: 'btn btn-mini btn-danger'
       .field
         = df.label :generic_name
         = df.text_field :generic_name
@@ -50,25 +52,24 @@
         = df.label :bedtime_time
         = df.text_field :bedtime_time
       = df.fields_for :instructions do |in_f|
-        %fieldset
-          %p Instruction
+        %fieldset{style: 'margin-top:10px;'}
+          %blockquote
+            %p Instruction
           .field
             = in_f.text_field :line
           .field
-            = in_f.link_to_remove "Remove this instruction"
+            = in_f.link_to_remove "Remove this instruction", class: 'btn btn-mini btn-danger'
       .clearfix
       .field        
-        %p= df.link_to_add "Add an instruction", :instructions
-      .clearfix
-      .field{style: 'float:right;'}
-        = df.link_to_remove "Remove this drug"
+        %p= df.link_to_add "Add an instruction", :instructions, class: 'btn btn-mini btn-success'
+
   .clearfix
   .field
-    %p= f.link_to_add "Add a drug", :drugs
+    %p= f.link_to_add "Add a drug", :drugs, class: 'btn btn-small btn-success'
   .clearfix
   .field
     = f.label :note, 'Note:'
     = f.text_area :note, rows: 2, style: 'width:600px;'
   .clearfix
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'btn btn-large'
