@@ -239,7 +239,7 @@
   -# %link{href: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css", rel: "stylesheet"}
   = stylesheet_link_tag 'bootstrap-editable.css'
 
-= nested_form_for @prescription do |f|
+= nested_form_for(@prescription, html: { onsubmit: "return savePrescription(event);" }) do |f|
   .row.x-resizeable
     .span5
       %p.bold Toronto General Hospital
@@ -282,7 +282,7 @@
         %li.large
           %a{href: "#"} A
     .span12
-      %table#drugs_table.table.table-bordered.table-hover.table-condensed
+      %table#drugs_table.table.table-bordered.table-hover.table-condensed{data: {prescription_id: "#{@prescription.id}"}}
         %thead
           %tr
             %th.control
@@ -305,4 +305,4 @@
 
 
     .span12
-      =# f.submit 'Save', class: 'btn btn-large'
+      = f.submit 'Save', class: 'btn btn-large'
