@@ -23,7 +23,10 @@
           %td= patient.admission_date
           / %td= patient.discharge_date
           %td= Pharmacist.find(patient.pharmacist_id).name if patient.pharmacist_id
-          %td= link_to 'Create MedList', start_discharge_for_patient_path(patient), class: 'btn btn-small btn-primary'
+          - if patient.prescriptions.blank?
+            %td= link_to 'Create MedList', start_discharge_for_patient_path(patient), class: 'btn btn-small btn-primary'
+          - else
+            %td= link_to 'Edit MedList', edit_prescription_for_patient_path(patient), class: 'btn btn-small btn-primary'
 
 
     %br

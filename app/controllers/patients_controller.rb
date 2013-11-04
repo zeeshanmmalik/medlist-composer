@@ -1,6 +1,7 @@
 class PatientsController < ApplicationController
   before_filter :authenticate_pharmacist!
-  before_action :set_patient, only: [:show, :edit, :update, :destroy, :start_discharge_for, :create_prescription_for]
+  before_action :set_patient, only: [:show, :edit, :update, :destroy, :start_discharge_for,
+                                     :create_prescription_for, :edit_prescription_for]
 
   # GET /patients
   # GET /patients.json
@@ -42,7 +43,12 @@ class PatientsController < ApplicationController
         pd.instructions.create(ins.as_json)
       end
     end
+  end
 
+  # GET /patients/1/load_prescription_for
+  def edit_prescription_for
+    @prescription = @patient.prescriptions.order("created_at").last
+    render :create_prescription_for
   end
 
   # POST /patients
