@@ -40,7 +40,7 @@ class PrescriptionsController < ApplicationController
   # PATCH/PUT /prescriptions/1
   # PATCH/PUT /prescriptions/1.json
   def update
-    respond_to do |format|
+    respond_to do |format|      
       if @prescription.update(prescription_params)
         format.html { redirect_to @prescription, notice: 'Prescription was successfully updated.' }
         format.json { head :no_content }
@@ -69,7 +69,7 @@ class PrescriptionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prescription_params
-      params.require(:prescription).permit(:pateint_id, :pharmacist_id, :physician, :base_template_id, :alergies, :note,
+      params.require(:prescription).permit(:pateint_id, :pharmacist_id, :physician, :base_template_id, :alergies, :note, :status,
                                             drugs_attributes: [:id,
                                                                :generic_name,
                                                                :strength,

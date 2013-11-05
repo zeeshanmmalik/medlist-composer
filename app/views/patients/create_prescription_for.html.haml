@@ -239,7 +239,7 @@
   -# %link{href: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css", rel: "stylesheet"}
   = stylesheet_link_tag 'bootstrap-editable.css'
 
-= nested_form_for(@prescription, html: { onsubmit: "return savePrescription(event);" }) do |f|
+= nested_form_for(@prescription, html: { onsubmit: "return false;" }) do |f|
   .row.x-resizeable
     .span5
       %p.bold Toronto General Hospital
@@ -304,5 +304,7 @@
                      resource: 'prescription', name: 'note', url: "/prescriptions/#{@prescription.id}"}}= @prescription.note
 
 
-    .span12
-      = f.submit 'Save', class: 'btn btn-large'
+    .span12{ style: 'margin-top: 50px;' }
+      = button_tag 'Save', name: 'save', class: 'btn btn-large btn-success', onclick: 'btnSaveClicked();'
+      = button_tag 'Finalize', name: 'finalize', class: 'btn btn-large btn-primary', onclick: 'btnFinalizeClicked();'
+      = button_tag 'Print Preview', class: 'btn btn-large btn-info'      

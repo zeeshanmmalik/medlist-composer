@@ -7,6 +7,30 @@ class PatientsController < ApplicationController
   # GET /patients.json
   def index
     @patients = Patient.all
+    
+    @new_patients = []
+    @editable_patients = []
+    @finalized_patients = []
+
+    @patients.each do |p|
+      prescription = p.prescriptions.order(:created_at).last
+
+      if prescription.nil?      
+        @new_patients << p
+      else  
+        case prescription.status
+        when 'new'
+          @new_patients << p
+        when 'editable'
+          @editable_patients << p
+        when 'final'
+          @finalized_patients << p
+        else
+          puts "!!!! Unknown Prescription Status !!!!"
+        end
+      end
+    end
+    
   end
 
   # GET /patients/1
@@ -26,16 +50,23 @@ class PatientsController < ApplicationController
   # GET /patients/1/start_discharge_for
   def start_discharge_for
     @base_templates = Template.all
+    @patient_history = @patient.prescriptions
   end
 
   # GET /patients/1/create_prescription_for
   def create_prescription_for
     @prescription = @patient.prescriptions.new
-    @template = Template.find(params[:template_id])
+    if params[:template_id]
+      @template = Template.find(params[:template_id])
+      @prescription.base_template_type = 'base'
+    elsif
+      @template = Prescription.find(params[:prescription_id])
+      @prescription.base_template_type = 'history'
+    end
     @prescription.note = @template.note
     @prescription.base_template_id = @template.id
-    @prescription.base_template_type = 'base'
     @prescription.pharmacist_id = current_pharmacist.id
+    @prescription.status = 'editable'
     @prescription.save
     @template.drugs.each do |drug|
       pd = @prescription.drugs.create(drug.as_json)

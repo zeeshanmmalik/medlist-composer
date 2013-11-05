@@ -4,6 +4,7 @@
   .span12
     %table.table.table-striped
       %tr.column-header
+        %th 
         %th First Name
         %th Last Name
         %th MRN
@@ -13,8 +14,13 @@
         / %th Discharge Date
         %th Pharmacist
         %th Discharge List
-      - @patients.each do |patient|
+      - if !@editable_patients.blank?
+        %tr{class: 'break'}
+          %th{colspan: '9'} Working Patient List
+        
+      - @editable_patients.each do |patient|
         %tr{class: cycle('odd', 'even')}
+          %td= link_to image_tag('edit.png'), edit_patient_path(patient), title: 'Edit Patient', rel: 'tooltip'
           %td= patient.first_name
           %td= patient.last_name
           %td= patient.mrn
@@ -23,12 +29,42 @@
           %td= patient.admission_date
           / %td= patient.discharge_date
           %td= Pharmacist.find(patient.pharmacist_id).name if patient.pharmacist_id
-          - if patient.prescriptions.blank?
-            %td= link_to 'Create MedList', start_discharge_for_patient_path(patient), class: 'btn btn-small btn-primary'
-          - else
-            %td= link_to 'Edit MedList', edit_prescription_for_patient_path(patient), class: 'btn btn-small btn-primary'
+          %td= link_to 'Edit MedList', edit_prescription_for_patient_path(patient), class: 'btn btn-small btn-primary'
 
+      - if !@new_patients.blank?
+        %tr{class: 'break'}
+          %th{colspan: '9'} New Patients
+
+      - @new_patients.each do |patient|
+        %tr{class: cycle('odd', 'even')}
+          %td= link_to image_tag('edit.png'), edit_patient_path(patient), title: 'Edit Patient', rel: 'tooltip'          
+          %td= patient.first_name
+          %td= patient.last_name
+          %td= patient.mrn
+          %td= patient.date_of_birth
+          %td= patient.program
+          %td= patient.admission_date
+          / %td= patient.discharge_date
+          %td= Pharmacist.find(patient.pharmacist_id).name if patient.pharmacist_id
+          %td= link_to 'Start MedList', start_discharge_for_patient_path(patient), class: 'btn btn-small btn-primary'
+
+      - if !@finalized_patients.blank?
+        %tr{class: 'break'}
+          %th{colspan: '9'} Old Patients
+
+      - @finalized_patients.each do |patient|
+        %tr{class: cycle('odd', 'even')}
+          %td= link_to image_tag('edit.png'), edit_patient_path(patient), title: 'Edit Patient', rel: 'tooltip'          
+          %td= patient.first_name
+          %td= patient.last_name
+          %td= patient.mrn
+          %td= patient.date_of_birth
+          %td= patient.program
+          %td= patient.admission_date
+          / %td= patient.discharge_date
+          %td= Pharmacist.find(patient.pharmacist_id).name if patient.pharmacist_id
+          %td= link_to 'New MedList', start_discharge_for_patient_path(patient), class: 'btn btn-small btn-primary'
 
     %br
-
+    
     = link_to 'New Patient', new_patient_path, class: 'btn btn-success'

@@ -112,6 +112,13 @@ td.dyno-action {
 
 .row table tr.odd td { background-color: #e6edf6; }
 
+.row table tr.even td { background-color: #f9f9f9; }
+
+.row table tr.break td,
+.row table tr.break th{
+    background-color: #d6e9c6;
+}
+
 /* fixed width for control columns to avoid resizing when text is resized */
 .row table tr th.control { width: 16px; }
 

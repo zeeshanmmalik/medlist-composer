@@ -1,5 +1,7 @@
-function savePrescription(event){
-    alert('in save prescription');
+function savePrescription(btn_clicked){
+    //alert('in save prescription');
+    //if ($(this).data('clicked').is('[name=no_ajax]'))
+    console.log(event.target);
     params = {};
     obj = {};
 
@@ -34,6 +36,14 @@ function savePrescription(event){
         });
         drug['id'] = $(this).attr('data-drug-id');
         obj['drugs_attributes'][$(this).attr('data-drug-id')] = drug;
+        if( btn_clicked == 'final' ){
+            console.log('final');
+            obj['status'] = 'final';
+        }else{
+            console.log('save');
+            obj['status'] = 'editable';
+        }
+        
     });
 
     params['prescription'] = obj;
@@ -53,3 +63,12 @@ function savePrescription(event){
     return false;
 }
 
+function btnSaveClicked() {
+    alert('save');
+    savePrescription('save');
+}
+
+function btnFinalizeClicked() {
+    alert('finalize');
+    savePrescription('final');
+}
