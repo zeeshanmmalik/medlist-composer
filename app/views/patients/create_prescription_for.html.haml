@@ -303,8 +303,11 @@
       %p{data: {editable: true, type: 'text', inputclass: 'input-large',
                      resource: 'prescription', name: 'note', url: "/prescriptions/#{@prescription.id}"}}= @prescription.note
 
-
-    .span12{ style: 'margin-top: 50px;' }
-      = button_tag 'Save', name: 'save', class: 'btn btn-large btn-success', onclick: 'btnSaveClicked();'
-      = button_tag 'Finalize', name: 'finalize', class: 'btn btn-large btn-primary', onclick: 'btnFinalizeClicked();'
-      = button_tag 'Print Preview', class: 'btn btn-large btn-info'      
+  .row{style: 'margin-top:50px;'}
+    .span6.pull-left
+      = link_to 'Cancel', patients_path, class: 'btn btn-large'
+    .span6
+      .btn-group.pull-right
+        = button_tag 'Save', name: 'save', class: 'btn btn-large btn-success', onclick: 'btnSaveClicked();'
+        = button_tag 'Finalize', name: 'finalize', class: 'btn btn-large btn-primary', onclick: 'btnFinalizeClicked();'
+        = button_tag 'Print Preview', class: 'btn btn-large btn-info'      

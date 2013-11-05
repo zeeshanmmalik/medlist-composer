@@ -16,7 +16,7 @@
         %th Discharge List
       - if !@editable_patients.blank?
         %tr{class: 'break'}
-          %th{colspan: '9'} Working Patient List
+          %th{colspan: '9'} Patient Work List
         
       - @editable_patients.each do |patient|
         %tr{class: cycle('odd', 'even')}
