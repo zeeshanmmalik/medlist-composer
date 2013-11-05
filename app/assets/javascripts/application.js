@@ -15,7 +15,7 @@
 //= require jquery.ui.autocomplete
 //= require jquery.cookie
 //= require twitter/bootstrap
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
 //= require bootstrap-editable
 //= require bootstrap-nested-editable-rails
 //= require jquery_nested_form

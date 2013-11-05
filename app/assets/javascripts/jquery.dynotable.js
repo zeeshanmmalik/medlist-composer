@@ -55,7 +55,11 @@
                 $(tbod).children("tr:last").hide().fadeIn(options.insertFadeSpeed);
 
                 // apply x-editable
+                clonedRow.find('[data-editable]').each(function() {
+                               applyAutoCompleteSearch.apply(this, arguments);
+                             });
                 clonedRow.find('[data-editable]').editable();
+                
             }
                         
             var removeRow = function(btn) {

@@ -126,16 +126,7 @@
       $tr.find('[data-editable]').editable();
     }
 
-
-    $(document).ready(function(){
-       $('#drugs_table').dynoTable();
-        
-       $.fn.editable.defaults.mode = 'inline';
-       $.fn.editable.defaults.defaultValue = '';
-       $.fn.editable.defaults.emptytext = '...';
-
-
-       $('[data-editable]').each(function() {
+    applyAutoCompleteSearch = function() {
                                var current_input_this;
                                var data_name = $(this).attr('data-name');
                                if( data_name == 'generic_name' ||
@@ -147,6 +138,7 @@
                                        editable.input.$input.autocomplete({
                                          //$(this).next().children().find('input:first').autocomplete({
                                          appentTo: $(this),
+                                         delay: 0,
                                          //source: drugs_data,
                                          focus: function( event, ui ) {
                                            //console.log("in focus");
@@ -192,7 +184,7 @@
 
                                            console.log(term);                                           
                                            var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
-                                           
+
                                            response($.map(drugs_data, function(el) {
                                              console.log(term + "  |  " + el.pfn);
                                              if (matcher.test(el.pfn)) {
@@ -221,7 +213,21 @@
                                      });
 
                                }
+                             };
+
+
+    $(document).ready(function(){
+       $('#drugs_table').dynoTable();
+        
+       $.fn.editable.defaults.mode = 'inline';
+       $.fn.editable.defaults.defaultValue = '';
+       $.fn.editable.defaults.emptytext = '...';
+
+
+       $('[data-editable]').each(function() {
+                               applyAutoCompleteSearch.apply(this, arguments);
                              });
+
        $('[data-editable]').editable();
     
        if($.cookie('TEXT_SIZE')) {
