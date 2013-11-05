@@ -19,7 +19,7 @@
 //= require bootstrap-editable
 //= require bootstrap-nested-editable-rails
 //= require jquery_nested_form
-//= require turbolinks
+// require turbolinks
 // require_tree .
 
 

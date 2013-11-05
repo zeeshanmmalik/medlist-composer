@@ -217,6 +217,8 @@
 
 
     $(document).ready(function(){
+       //$(window).on('load',function(){
+       console.log('hello');
        $('#drugs_table').dynoTable();
         
        $.fn.editable.defaults.mode = 'inline';
@@ -239,6 +241,7 @@
          $.cookie('TEXT_SIZE',textSize, { path: '/', expires: 10000 });
          return false;
        });
+       console.log('done');
     });
 
 = content_for :page_css do

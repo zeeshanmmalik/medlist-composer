@@ -21,7 +21,7 @@
                 onRowClone: function(){},
                 onRowAdd: function(){},
                 onTableEmpty: function(){},
-                onRowReorder: function(){}
+                onRowReorder: function(){console.log('--- row reordered ---');}
             };     
             
             options = $.extend(defaults, options);
