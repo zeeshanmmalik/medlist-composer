@@ -70,7 +70,7 @@ class TemplatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def template_params
-      params.require(:template).permit(:name, :note,
+      params.require(:template).permit(:name, :note, :program,
                                        drugs_attributes: [:id,
                                                           :generic_name,
                                                           :strength,

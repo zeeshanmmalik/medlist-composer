@@ -9,6 +9,9 @@
   .field
     = f.label :name
     = f.text_field :name
+  .field
+    = f.label :program
+    = f.select :program, %w[Heart Kidney Liver Lung], { include_blank: "Select a program..." }
   .clearfix
   = f.fields_for :drugs do |df|
     %fieldset{style:"margin-top:20px;"}

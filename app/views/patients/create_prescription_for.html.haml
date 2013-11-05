@@ -256,7 +256,7 @@
       %p.bold
         Date:
         %span{data: {editable: true, type: 'date', inputclass: 'input-medium'}}= Date.today
-      %p.bold
+      %p#pharmacist_id.bold{data: {pharmacist_id: "#{current_pharmacist.id}"}}
         Pharmacist Name:
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'pharmacist', name: 'last_name', url: "/pharmacists/#{current_pharmacist.id}"}}= current_pharmacist.last_name

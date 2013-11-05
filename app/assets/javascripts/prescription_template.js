@@ -36,6 +36,7 @@ function savePrescription(btn_clicked){
         });
         drug['id'] = $(this).attr('data-drug-id');
         obj['drugs_attributes'][$(this).attr('data-drug-id')] = drug;
+        obj['pharmacist_id'] = $('#pharmacist_id').attr('data-pharmacist-id');
         if( btn_clicked == 'final' ){
             console.log('final');
             obj['status'] = 'final';
