@@ -55,7 +55,7 @@ function savePrescription(btn_clicked){
         dataType: 'json',
         success: function(data)
         {
-            alert("form success"); // show response from the php script.
+            console.log("form success"); // show response from the php script.
         }
     });
 
@@ -64,11 +64,11 @@ function savePrescription(btn_clicked){
 }
 
 function btnSaveClicked() {
-    alert('save');
+    console.log('save');
     savePrescription('save');
 }
 
 function btnFinalizeClicked() {
-    alert('finalize');
+    console.log('finalize');
     savePrescription('final');
 }
