@@ -1,0 +1,29 @@
+%html
+  %head
+    = wicked_pdf_stylesheet_link_tag 'pdf-bootstrap'
+    = wicked_pdf_stylesheet_link_tag 'pdf_bootstrap_and_overrides'
+
+  %body
+    .row.x-resizeable
+      .span5
+        %p.bold Toronto General Hospital
+        %p.bold Department of Pharmacy
+        %p.bold Medication List
+      .span7
+        %p.bold
+          Patient Name:
+          %span= @patient.last_name + ", " + @patient.first_name
+        %p.bold
+          Date:
+          %span= Date.today
+        %p.bold
+          Pharmacist Name:
+          %span= current_pharmacist.last_name + ", " + current_pharmacist.first_name        
+        %p.bold
+          Physician Name:
+          %span= @prescription.physician
+    .row.x-resizeable
+      .span12
+        %p
+          %strong Medication Allergies:
+          %span= @prescription.alergies

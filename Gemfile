@@ -38,7 +38,9 @@ gem 'bootstrap-editable-rails'
 gem 'nested_form' 
 
 gem 'devise'
-    
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+      
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem 'capybara', "~> 2.0.2"

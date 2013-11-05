@@ -1,5 +1,7 @@
 class PrescriptionsController < ApplicationController
+  before_filter :authenticate_pharmacist!
   before_action :set_prescription, only: [:show, :edit, :update, :destroy]
+  before_action :set_patient, only: [:show]
 
   # GET /prescriptions
   # GET /prescriptions.json
@@ -10,6 +12,24 @@ class PrescriptionsController < ApplicationController
   # GET /prescriptions/1
   # GET /prescriptions/1.json
   def show
+    @font_size = params[:font_size] || ''
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@prescription.id}",
+               template: 'prescriptions/show.pdf.haml',
+               layout: 'layouts/pdf_plain.haml',
+               show_as_html: params[:debug].present?, 
+               disposition: 'inline',
+               margin: {:top                => "1.00in",                     # default 10 (mm)
+                        :bottom             => "0.49in",
+                        :left               => "0.10in",
+                        :right              => "0.25in"},
+               page_size: 'Letter',
+               #header: {:html => { :template => 'prescriptions/_header.pdf.haml' }},
+               footer: { :center => 'Page [page] of [topage]' }
+      end
+    end
   end
 
   # GET /prescriptions/new
@@ -65,6 +85,10 @@ class PrescriptionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_prescription
       @prescription = Prescription.find(params[:id])
+    end
+
+    def set_patient
+      @patient = Patient.find(params[:patient_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

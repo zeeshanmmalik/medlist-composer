@@ -26,6 +26,7 @@ module DischargeMedlistComposer
     # config.i18n.default_locale = :de
 
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
+    config.assets.precompile += ['blueprint/screen.css', 'pdf.css', 'jquery.ui.datepicker.js', 'pdf.js']
 
     config.generators do |g|    
       g.test_framework :rspec, :fixture => true

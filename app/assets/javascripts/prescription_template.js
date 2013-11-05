@@ -73,3 +73,11 @@ function btnFinalizeClicked() {
     console.log('finalize');
     savePrescription('final');
 }
+
+function btnPrintPreviewClicked() {
+    console.log('print');
+    window.location.href = '/prescriptions/' +
+                           $('#drugs_table').attr('data-prescription-id') + '.pdf' +
+                           '?patient_id=' + $('#patient_id').attr('data-patient-id') +
+                           '&font_size=' + $.cookie('TEXT_SIZE');
+}

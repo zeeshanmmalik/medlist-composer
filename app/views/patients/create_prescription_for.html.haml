@@ -246,7 +246,7 @@
       %p.bold Department of Pharmacy
       %p.bold Medication List
     .span7
-      %p.bold
+      %p#patient_id.bold{data: {patient_id: "#{@patient.id}"}}
         Patient Name:
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'patient', name: 'last_name', url: "/patients/#{@patient.id}"}}= @patient.last_name
@@ -310,4 +310,4 @@
       .btn-group.pull-right
         = button_tag 'Save', name: 'save', class: 'btn btn-large btn-success', onclick: 'btnSaveClicked();'
         = button_tag 'Finalize', name: 'finalize', class: 'btn btn-large btn-primary', onclick: 'btnFinalizeClicked();'
-        = button_tag 'Print Preview', class: 'btn btn-large btn-info'      
+        = button_tag 'Print Preview', class: 'btn btn-large btn-info', onclick: 'btnPrintPreviewClicked();'
