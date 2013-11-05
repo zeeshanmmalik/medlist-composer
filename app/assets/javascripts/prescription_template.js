@@ -8,11 +8,15 @@ function savePrescription(btn_clicked){
     obj['drugs_attributes'] = {};
 
     $('#drugs_table tr[data-drug-id]').each( function (index) {
-        drug = {};
+        that = this;
+        drug = {};        
         $(this).find('[data-nested]').each( function () {
             if ( $(this).attr('data-nested-2') ) {                
                 instruction = {};
-                instruction['id'] = $(this).attr('data-nnid');
+                if( $(that).attr('data-new-drug') === undefined ){
+                    // if not a new drug, set id attribute
+                    instruction['id'] = $(this).attr('data-nnid');
+                }
 
                 if( $(this).text() != '...' ){
                     instruction['line'] = $(this).text();
@@ -34,7 +38,10 @@ function savePrescription(btn_clicked){
                 }
             }
         });
-        drug['id'] = $(this).attr('data-drug-id');
+        if( $(this).attr('data-new-drug') === undefined ){
+            // if not a new drug... set id attribute
+            drug['id'] = $(this).attr('data-drug-id');
+        }
         obj['drugs_attributes'][$(this).attr('data-drug-id')] = drug;
         obj['pharmacist_id'] = $('#pharmacist_id').attr('data-pharmacist-id');
         if( btn_clicked == 'final' ){

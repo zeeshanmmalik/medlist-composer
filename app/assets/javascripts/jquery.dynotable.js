@@ -54,11 +54,25 @@
                 bindActions(clonedRow);
                 $(tbod).children("tr:last").hide().fadeIn(options.insertFadeSpeed);
 
-                // apply x-editable
+                // set tmp id attributes for new drug
+                clonedRow.attr('data-new-drug',true);
+                var new_drug_tmp_id = $.now();
+                clonedRow.attr('data-drug-id', new_drug_tmp_id);
+                // set tmp ids for nested instructions
+                clonedRow.find('[data-nested-2]').each( function(index) {
+                    $(this).attr('data-nnid', $.now() + index);
+                });
+                // reset data-nid for all drug attributes
+                clonedRow.find('[data-nid]').each( function(index) {
+                    $(this).attr('data-nid', new_drug_tmp_id);
+                });                
+                // apply autocomplete search
                 clonedRow.find('[data-editable]').each(function() {
                                applyAutoCompleteSearch.apply(this, arguments);
                              });
+                // apply x-editable
                 clonedRow.find('[data-editable]').editable();
+                
                 
             }
                         
