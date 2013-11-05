@@ -83,14 +83,19 @@
                 if(numRows > 1 || options.lastRowRemovable === true) {
                     var trToRemove = $(btn).parents("tr:first");
                     $(trToRemove).fadeOut(options.removeFadeSpeed, function() {
-                        $(trToRemove).remove();
+                        //Since we want to remove the drug from database.
+                        //Don't remove from the DOM, just hide the row
+                        //$(trToRemove).remove();
+                        $(trToRemove).hide();
                         options.onRowRemove();
-                        if(numRows == 1) {                            
+                        if(numRows == 1) {
                             if(options.hideTableOnEmpty) {
                                 $(tbod).parents('table').first().hide();
                             }
                             options.onTableEmpty();
                         }
+
+                        $(trToRemove).attr('data-destroy', 1);
                     });
                 }                            
             }

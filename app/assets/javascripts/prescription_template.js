@@ -9,7 +9,12 @@ function savePrescription(btn_clicked){
 
     $('#drugs_table tr[data-drug-id]').each( function (index) {
         that = this;
-        drug = {};        
+        drug = {};
+        if( $(this).attr('data-destroy') === undefined ){
+            drug['_destroy'] = 'false'
+        }else{
+            drug['_destroy'] = $(this).attr('data-destroy');
+        }
         $(this).find('[data-nested]').each( function () {
             if ( $(this).attr('data-nested-2') ) {                
                 instruction = {};
