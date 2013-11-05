@@ -21,10 +21,10 @@ class PrescriptionsController < ApplicationController
                layout: 'layouts/pdf_plain.haml',
                show_as_html: params[:debug].present?, 
                disposition: 'inline',
-               margin: {:top                => "1.00in",                     # default 10 (mm)
-                        :bottom             => "0.49in",
-                        :left               => "0.10in",
-                        :right              => "0.25in"},
+               margin: {:top                => "0.50in",                     # default 10 (mm)
+                        :bottom             => "0.50in",
+                        :left               => "0.50in",
+                        :right              => "0.50in"},
                page_size: 'Letter',
                #header: {:html => { :template => 'prescriptions/_header.pdf.haml' }},
                footer: { :center => 'Page [page] of [topage]' }

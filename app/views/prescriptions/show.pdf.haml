@@ -4,7 +4,7 @@
       %p.bold Toronto General Hospital
       %p.bold Department of Pharmacy
       %p.bold Medication List
-    .span4{style: 'float:right;'}
+    .span4.pull-right
       %p.bold
         Patient Name:
         %span= @patient.last_name + ", " + @patient.first_name
@@ -23,3 +23,20 @@
           %strong Medication Allergies:
           %span= @prescription.alergies
 
+      .span12
+        %table.table.table-bordered.table-hover.table-condensed
+          %thead
+            %tr
+              %th DRUG
+              %th INSTRUCTIONS
+              %th PURPOSE
+              %th AM
+              %th NOON
+              %th SUPPER
+              %th BED-TIME
+          %tbody.drugs
+            - @prescription.drugs.each do |drug|
+              = render partial: 'pdf_drug_row', locals: { drug: drug }
+
+      .span12
+        %p= @prescription.note
