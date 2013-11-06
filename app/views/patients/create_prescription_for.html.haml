@@ -88,7 +88,7 @@
     function setEditableValues( $tr_children, item, $tr ){
       $tr_children.find('[data-name="generic_name"]:first').text(item.pfn);
       $tr_children.find('[data-name="strength"]:first').text(item.strength);
-      $tr_children.find('[data-name="brand_name"]:first').text("("+item.brand+")");
+      $tr_children.find('[data-name="brand_name"]:first').text("("+item.brand.replace(/^\(*/,'').replace(/\)*$/,'')+")");
       $tr_children.find('[data-name="purpose"]:first').text(item.purpose);
       $tr_children.find('[data-nested-2="instructions"]:first').text(item.instruction);
       $tr_children.find('[data-name="am_check"]:first').text(item.am_check);
@@ -129,12 +129,30 @@
     applyAutoCompleteSearch = function() {
                                var current_input_this;
                                var data_name = $(this).attr('data-name');
+
+                               // Change initval on editable field changed
+                               $(this).on('save', function(e, params) {
+                                       var editable = $(this).data('editable');
+                                       editable.$element.attr('data-initval', params.newValue);
+                                       console.log(editable.$element.attr('data-initval'));
+                                       if( data_name == 'brand_name' ){
+                                         params.newValue = '(' + params.newValue + ')';
+                                       }
+                                     });
+                               // Apply autocomplete search to generic_name, strength and brand
                                if( data_name == 'generic_name' ||
                                    data_name == 'strength' ||
                                    data_name == 'brand_name' ) {
                                      $(this).on('shown', function(e, editable) {
                                        var editable = $(this).data('editable');
                                        //console.log(editable);
+                                       //console.log(editable.value);
+                                       if( data_name == 'brand_name' ){
+                                         // trim brackets for brand name                                         
+                                         brand_name_val = editable.value.replace(/^\(*/,'').replace(/\)*$/,'');
+                                         //console.log(brand_name_val);
+                                         editable.input.$input.val(brand_name_val);
+                                       }
                                        editable.input.$input.autocomplete({
                                          //$(this).next().children().find('input:first').autocomplete({
                                          appentTo: $(this),
@@ -210,8 +228,7 @@
                                          }
                                        });
 
-                                     });
-
+                                     });                                     
                                }
                              };
 

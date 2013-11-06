@@ -87,6 +87,10 @@ td.dyno-action {
     font-weight: normal !important;
 }
 
+.bold.editable-unsaved {
+    font-weight: bold !important;
+}
+
 .input-large {
     width: 750px !important;
     height: 40px !important;

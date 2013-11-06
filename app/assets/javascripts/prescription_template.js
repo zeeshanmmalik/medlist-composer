@@ -24,11 +24,12 @@ function savePrescription(btn_clicked){
                     instruction['id'] = $(this).attr('data-nnid');
                 }
 
-                if( $(this).text() != '...' ){
-                    instruction['line'] = $(this).text();
-                }else{
-                    instruction['line'] = '';
-                }
+                instruction['line'] = $(this).attr('data-initval');
+                //if( $(this).text() != '...' ){
+                //    instruction['line'] = $(this).text();
+                //}else{
+                //    instruction['line'] = '';
+                //}
                 
                 instruction['_destroy'] = 'false';
                 
@@ -37,11 +38,12 @@ function savePrescription(btn_clicked){
                 }
                 drug['instructions_attributes'][$(this).attr('data-nnid')] = instruction;
             }else{
-                if( $(this).text() != '...' ){
-                    drug[$(this).attr('data-name')] = $(this).text();
-                }else{
-                    drug[$(this).attr('data-name')] = '';
-                }
+                drug[$(this).attr('data-name')] = $(this).attr('data-initval');
+                //if( $(this).text() != '...' ){
+                //    drug[$(this).attr('data-name')] = $(this).text();
+                //}else{
+                //    drug[$(this).attr('data-name')] = '';
+                //}
             }
         });
         if( $(this).attr('data-new-drug') === undefined ){

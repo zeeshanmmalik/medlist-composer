@@ -1,21 +1,23 @@
 .document{class: "#{@font_size}"}
+  .row-fluid{style: 'margin-bottom: 10px;'}
+    = link_to "Close Preview", edit_prescription_for_patient_url(@patient), class: 'btn btn-primary pull-right'
   .row-fluid.x-resizeable
     .span4
       %p.bold Toronto General Hospital
       %p.bold Department of Pharmacy
       %p.bold Medication List
     .span4.pull-right
-      %p.bold
-        Patient Name:
+      %p
+        %strong Patient Name:
         %span= @patient.last_name + ", " + @patient.first_name
-      %p.bold
-        Date:
+      %p
+        %strong Date:
         %span= Date.today
-      %p.bold
-        Pharmacist Name:
+      %p
+        %strong Pharmacist Name:
         %span= current_pharmacist.last_name + ", " + current_pharmacist.first_name        
-      %p.bold
-        Physician Name:
+      %p
+        %strong Physician Name:
         %span= @prescription.physician
     .row-fluid.x-resizeable
       .span12
