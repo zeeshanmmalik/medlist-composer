@@ -272,25 +272,25 @@
       %p.bold Department of Pharmacy
       %p.bold Medication List
     .span7
-      %p#patient_id.bold{data: {patient_id: "#{@patient.id}"}}
-        Patient Name:
+      %p#patient_id{data: {patient_id: "#{@patient.id}"}}
+        %strong Patient Name:
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'patient', name: 'last_name', url: "/patients/#{@patient.id}"}}= @patient.last_name
         %span= ", "
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'patient', name: 'first_name', url: "/patients/#{@patient.id}"}}= @patient.first_name        
-      %p.bold
-        Date:
+      %p
+        %strong Date:
         %span{data: {editable: true, type: 'date', inputclass: 'input-medium'}}= Date.today
-      %p#pharmacist_id.bold{data: {pharmacist_id: "#{current_pharmacist.id}"}}
-        Pharmacist Name:
+      %p#pharmacist_id{data: {pharmacist_id: "#{current_pharmacist.id}"}}
+        %strong Pharmacist Name:
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'pharmacist', name: 'last_name', url: "/pharmacists/#{current_pharmacist.id}"}}= current_pharmacist.last_name
         %span= ", "
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'pharmacist', name: 'first_name', url: "/pharmacists/#{@patient.id}"}}= current_pharmacist.first_name        
-      %p.bold
-        Physician Name:
+      %p
+        %strong Physician Name:
         %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
                      resource: 'prescription', name: 'physician', url: "/prescriptions/#{@prescription.id}"}}= @prescription.physician
   .row.x-resizeable
