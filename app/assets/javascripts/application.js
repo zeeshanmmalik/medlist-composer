@@ -12,7 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.autocomplete
+//= require jquery.ui.all
+// require jquery.ui.autocomplete
+// require jquery.ui.draggable
+// require jquery.ui.droppable
+// require jquery.ui.resizeable
+// require jquery.ui.selectable
+// require jquery.ui.sortable
 //= require jquery.cookie
 //= require twitter/bootstrap
 //= require bootstrap-datepicker/core
