@@ -149,3 +149,6 @@ ul.ui-autocomplete .ui-menu-item {
   ui-autocomplete css over-written end
 ------------------------------------------*/
 
+.navbar .nav>li>a {
+    font-size: 14px !important;
+}
