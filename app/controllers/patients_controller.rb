@@ -50,7 +50,7 @@ class PatientsController < ApplicationController
   # GET /patients/1/start_discharge_for
   def start_discharge_for
     @base_templates = Template.all
-    @patient_history = @patient.prescriptions
+    @patient_history = @patient.prescriptions.order('updated_at DESC')
   end
 
   # GET /patients/1/create_prescription_for

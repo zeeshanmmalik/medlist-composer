@@ -305,8 +305,8 @@
             %th.control
             %th.control
         %tbody.drugs
-          - @prescription.drugs.each do |drug|
-            = render partial: 'drug_row', locals: { drug: drug }
+          - @prescription.drugs.order('order_no ASC').each_with_index do |drug, index|
+            = render partial: 'drug_row', locals: { drug: drug, index: index}
 
     .span12
       %p{data: {editable: true, type: 'text', inputclass: 'input-large',

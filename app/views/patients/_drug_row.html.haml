@@ -1,4 +1,4 @@
-%tr{data: {drug_id: "#{drug.id}"}}
+%tr{data: {drug_id: "#{drug.id}", order_no: "#{drug.order_no || index}"}}
   %td.dyno-action
     = image_tag 'drag.png', class: 'drag-handle', alt: 'click and drag to rearrange'
   %td

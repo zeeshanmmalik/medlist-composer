@@ -15,6 +15,7 @@ function savePrescription(btn_clicked){
         }else{
             drug['_destroy'] = $(this).attr('data-destroy');
         }
+        drug['order_no'] = $(this).attr('data-order-no');
         $(this).find('[data-nested]').each( function () {
             if ( $(this).attr('data-nested-2') ) {                
                 instruction = {};

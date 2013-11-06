@@ -17,11 +17,11 @@
                 insertFadeSpeed: "slow",
                 removeFadeSpeed: "fast",
                 hideTableOnEmpty: true,
-                onRowRemove: function(){},
-                onRowClone: function(){},
-                onRowAdd: function(){},
+                onRowRemove: function(){updateOrderNo();},
+                onRowClone: function(){updateOrderNo();},
+                onRowAdd: function(){updateOrderNo();},
                 onTableEmpty: function(){},
-                onRowReorder: function(){console.log('--- row reordered ---');}
+                onRowReorder: function(){updateOrderNo();}
             };     
             
             options = $.extend(defaults, options);
@@ -33,7 +33,7 @@
                 options.onRowClone();
             }
                         
-            var insertRow = function(clonedRow, tbod, btn) {                
+            var insertRow = function(clonedRow, tbod, btn) {
                 var numRows = $(tbod).children("tr").length;
                 if(options.hideTableOnEmpty && numRows == 0) {
                     $(tbod).parents("table").first().show();
@@ -130,6 +130,13 @@
                 });
 
 
+            }
+
+            var updateOrderNo = function(obj) {
+                console.log('in updateOrderNo');
+                $('#drugs_table tr[data-drug-id]').each( function (index){
+                    $(this).attr('data-order-no', index);
+                });
             }
          
             return this.each(function() {                             

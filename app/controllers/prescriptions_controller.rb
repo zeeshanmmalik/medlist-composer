@@ -103,7 +103,7 @@ class PrescriptionsController < ApplicationController
                                                                :noon_check, :noon_time,
                                                                :supper_check, :supper_time,
                                                                :bedtime_check, :bedtime_time,
-                                                               :_destroy,
+                                                               :order_no, :_destroy,
                                                                instructions_attributes: [:id,
                                                                                          :line,
                                                                                          :_destroy]])
