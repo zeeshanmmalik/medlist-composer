@@ -1,4 +1,5 @@
 function savePrescription(btn_clicked){
+    enableLoadingClasses();
     //alert('in save prescription');
     //if ($(this).data('clicked').is('[name=no_ajax]'))
     console.log(event.target);
@@ -68,15 +69,45 @@ function savePrescription(btn_clicked){
         url: '/prescriptions/' + $('#drugs_table').attr('data-prescription-id'),
         data: params,
         type: 'PUT',
-        dataType: 'json',
-        success: function(data)
-        {
-            console.log("form success"); // show response from the php script.
-        }
+        dataType: 'json'
+    })
+    .done( function() {
+        console.log("form success"); 
+        disableLoadingClasses();
+        $('#alert_msg').addClass('alert-success').text('Prescription succesfully saved!').animate({
+            width: "toggle",
+            height: "toggle",
+            opacity: "toggle"
+        }, {
+            duration: "slow"
+        }).delay(5000).fadeOut(300);
+    })
+    .fail( function() {
+        console.log("request failed");
+        disableLoadingClasses();
+        $('#alert_msg').addClass('alert-error').html('<b>Oh snap!</b> Could not save changes due to error in the server.').animate({
+            width: "toggle",
+            height: "toggle",
+            opacity: "toggle"
+        }, {
+            duration: "slow"
+        }).delay(10000).fadeOut(300);
     });
-
     
     return false;
+}
+
+function enableLoadingClasses() {
+    $('#loading_image').removeClass('hide');
+    $('.btn-group button').addClass('disabled');
+    $('.btn-group button').attr('disabled','disabled');
+
+}
+
+function disableLoadingClasses() {
+    $('#loading_image').addClass('hide');
+    $('.btn-group button').removeClass('disabled');
+    $('.btn-group button').removeAttr('disabled');
 }
 
 function btnSaveClicked() {
@@ -91,6 +122,7 @@ function btnFinalizeClicked() {
 
 function btnPrintPreviewClicked() {
     console.log('print');
+    enableLoadingClasses();
     window.location.href = '/prescriptions/' +
                            $('#drugs_table').attr('data-prescription-id') + '.pdf' +
                            '?patient_id=' + $('#patient_id').attr('data-patient-id') +

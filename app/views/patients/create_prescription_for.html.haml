@@ -564,10 +564,12 @@
                      resource: 'prescription', name: 'note', url: "/prescriptions/#{@prescription.id}"}}= @prescription.note
 
   .row{style: 'margin-top:50px;'}
-    .span6.pull-left
+    .span4.pull-left
       = link_to 'Cancel', patients_path, class: 'btn btn-large'
-    .span6
+    .span8
       .btn-group.pull-right
         = button_tag 'Save', name: 'save', class: 'btn btn-large btn-success', onclick: 'btnSaveClicked();'
         = button_tag 'Finalize', name: 'finalize', class: 'btn btn-large btn-primary', onclick: 'btnFinalizeClicked();'
-        = button_tag 'Print Preview', class: 'btn btn-large btn-info', onclick: 'btnPrintPreviewClicked();'
+        = button_tag 'Print Preview', name: 'print', class: 'btn btn-large btn-info', onclick: 'btnPrintPreviewClicked();'
+      #loading_image.hide.pull-right{style: 'padding: 8px 20px;'}= image_tag 'loading64.gif'
+      #alert_msg.pull-right.alert.hide{style: 'margin:4px 10px;'}
