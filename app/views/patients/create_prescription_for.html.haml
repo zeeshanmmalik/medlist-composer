@@ -351,6 +351,9 @@
       $tr_children.find('[data-name="supper_time"]:first').text(item.supper_time);
       $tr_children.find('[data-name="bedtime_check"]:first').text(item.bedtime_check);
       $tr_children.find('[data-name="bedtime_time"]:first').text(item.bedtime_time);
+
+      //color code instruction
+      colorCodeInstruction($tr_children.find('[data-nested-2="instructions"]:first'));
     }
 
     function updateEditableInitValues( $tr_children, item ){
