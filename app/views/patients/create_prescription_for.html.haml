@@ -380,23 +380,23 @@
 
     function colorCodeInstruction( $instruction ) {
       var dosage_rxp_str = "([0-9]+(-[0-9]+)?)";
-      var unit_rxp_str = "(mg|units)";
+      var unit_rxp_str = "(mg|units|ml|mcg|puffs|g)";
       //var dosage_unit_rxp = new RegExp("([0-9]+-?[0-9]+[ ]*mg)");
-      var dosage_unit_rxp = new RegExp("(" + dosage_rxp_str + "[ ]*" + unit_rxp_str + ")");
+      var dosage_unit_rxp = new RegExp("(" + dosage_rxp_str + "[ ]*" + unit_rxp_str + ")",'i');
       var content = $instruction.html();
       var dosage_unit = content.match(dosage_unit_rxp);
       console.log("array: " + dosage_unit);
       if( dosage_unit != null && dosage_unit.length > 0 ) {
         dosage_unit = dosage_unit[0];
         console.log(dosage_unit);
-        dosage_unit = dosage_unit.replace(new RegExp(dosage_rxp_str), "<span style='color: red;'>$1</span>");
-        dosage_unit = dosage_unit.replace(new RegExp(unit_rxp_str), "<span style='color: blue;'>$1</span>");
+        dosage_unit = dosage_unit.replace(new RegExp(dosage_rxp_str,'i'), "<span style='color: red;'>$1</span>");
+        dosage_unit = dosage_unit.replace(new RegExp(unit_rxp_str,'i'), "<span style='color: blue;'>$1</span>");
         console.log(dosage_unit);
         $instruction.html(content.replace(dosage_unit_rxp, dosage_unit));
         
-        var freq_rxp_str = "((once|twice|three times)[ ]*daily|every[ ]*[0-9]+(-[0-9]+)?[ ]*hours)";
+        var freq_rxp_str = "((once|twice|(three|four|five|six) times)[ ]*(daily|a day|weekly|a week)|(every)?[ ]*[0-9]+(-[0-9]+)?[ ]*hours)";
         var content = $instruction.html();
-        $instruction.html(content.replace(new RegExp(freq_rxp_str), "<span style='color: green;'>$1</span>"));
+        $instruction.html(content.replace(new RegExp(freq_rxp_str,'i'), "<span style='color: green;'>$1</span>"));
       }
     }
 
