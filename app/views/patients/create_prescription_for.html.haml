@@ -399,9 +399,89 @@
       }
 
       // frequency
-      var freq_rxp_str = "((once|twice|(three|four|five|six) times)[ ]*(daily|a day|weekly|a week)|(every)?[ ]*[0-9]+(-[0-9]+)?[ ]*hours)";
+      var freq_rxp_str = "((once|twice|(two|three|four|five|six) times)[ ]*(daily|a day|weekly|a week)|(every)?[ ]*[0-9]+(-[0-9]+)?[ ]*hours)";
       var content = $instruction.html();
       $instruction.html(content.replace(new RegExp(freq_rxp_str,'i'), "<span style='color: green;'>$1</span>"));
+    }
+
+    function showFrequencyMismatchError() {
+      if( $('#top_fixed_notice .alert').is(':hidden') ){
+        $('#top_fixed_notice .alert')
+          .html('<b>Beware!</b> Daily frequency and checked out times (AM, NOON, SUPPER, BEDTIME) do not match for this drug.')
+          .addClass('alert-error top-notice-div')
+          .css('display','none')
+          .animate({
+            width: "toggle",
+            height: "toggle",
+            opacity: "toggle"
+          }, {
+            duration: "slow"
+          })
+          .delay(6000)
+          .fadeOut(300);
+      }
+    }
+    
+    function matchFrequencyWithTimeChecks( $tr ) {
+    
+      var no_of_time_checks = 0;
+      $tr.find('[data-name$="_check"]').each( function () {
+        if( $.trim($(this).text().toLowerCase()) == 'x' ){ no_of_time_checks += 1; }
+      });
+    
+      var daily_freq_rxp = new RegExp("(once|twice|(two|three|four|five|six) times)[ ]*(daily|a day)", 'i');
+      var instruction = $tr.find('[data-nested-2="instructions"]:first').text();
+      var daily_freq = instruction.match(daily_freq_rxp);
+      if( daily_freq != null && daily_freq.length >0 ){
+        daily_freq = daily_freq[0].toLowerCase();
+        switch (daily_freq){
+          case "once daily":
+          case "once a day":
+            if( no_of_time_checks != 1 ){
+              console.log("time check mismatch with (" + daily_freq + ") frequency");
+              showFrequencyMismatchError();
+            }else{
+              $('#top_fixed_notice .alert').hide();
+            }
+            break;
+          case "twice daily":
+          case "twice a day":
+          case "two times daily":
+          case "two times a day":
+            if( no_of_time_checks != 2 ){
+              console.log("time check mismatch with (" + daily_freq + ") frequency");
+              showFrequencyMismatchError();
+            }else{
+              $('#top_fixed_notice .alert').hide();
+            }
+            break;
+          case "three times daily":
+          case "three times a day":
+            if( no_of_time_checks != 3 ){
+              console.log("time check mismatch with (" + daily_freq + ") frequency");
+              showFrequencyMismatchError();
+            }else{
+              $('#top_fixed_notice .alert').hide();
+            }
+            break;
+          case "four times daily":
+          case "four times a day":
+            if( no_of_time_checks != 4 ){
+              console.log("time check mismatch with (" + daily_freq + ") frequency");
+              showFrequencyMismatchError();
+            }else{
+              $('#top_fixed_notice .alert').hide();
+            }
+            break;
+          default:
+            console.log("unknown daily frequency!");
+            $('#top_fixed_notice .alert').hide();
+            break;
+        }
+      }else{
+        console.log("not a daily frequency!");
+        $('#top_fixed_notice .alert').hide();
+      }
     }
 
     applyAutoCompleteSearch = function() {
@@ -428,6 +508,8 @@
                                    if( $element.attr('data-nested-2') == 'instructions' ){
                                      colorCodeInstruction($element);
                                    }
+
+                                   matchFrequencyWithTimeChecks($element.closest('tr'));
                                  }
                                });
                                // Apply autocomplete search to generic_name, strength and brand
@@ -572,6 +654,8 @@
   -# %link{href: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css", rel: "stylesheet"}
   = stylesheet_link_tag 'bootstrap-editable.css'
 
+#top_fixed_notice
+  .alert.hide
 = nested_form_for(@prescription, html: { onsubmit: "return false;" }) do |f|
   .row.x-resizeable
     .span5

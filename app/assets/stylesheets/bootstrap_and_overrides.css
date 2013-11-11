@@ -152,3 +152,21 @@ ul.ui-autocomplete .ui-menu-item {
 .navbar .nav>li>a {
     font-size: 14px !important;
 }
+
+#top_fixed_notice {
+    /* fixed position a zero-height full width container */
+    position: fixed;
+    top: 80px; /* or whatever position is desired */
+    left: 0;
+    right: 0;
+    height: 0;
+    /* center all inline content */
+    text-align: center;
+}
+
+#top_fixed_notice > .top-notice-div {
+    /* make the block inline */
+    display: inline-block;
+    /* reset container's center alignment */
+    text-align: left;
+}
