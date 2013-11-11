@@ -407,8 +407,8 @@
     function showFrequencyMismatchError() {
       if( $('#top_fixed_notice .alert').is(':hidden') ){
         $('#top_fixed_notice .alert')
-          .html('<b>Beware!</b> Daily frequency and checked out times (AM, NOON, SUPPER, BEDTIME) do not match for this drug.')
-          .addClass('alert-error top-notice-div')
+          .html('<b>Heads up!</b> Daily frequency and checked out times (AM, NOON, SUPPER, BEDTIME) do not match for this drug.')
+          .addClass('alert-info top-notice-div')
           .css('display','none')
           .animate({
             width: "toggle",
