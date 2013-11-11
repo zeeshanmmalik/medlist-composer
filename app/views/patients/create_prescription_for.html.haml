@@ -395,12 +395,13 @@
         dosage_unit = dosage_unit.replace(new RegExp(dosage_rxp_str,'i'), "<span style='color: red;'>$1</span>");
         dosage_unit = dosage_unit.replace(new RegExp(unit_rxp_str,'i'), "<span style='color: blue;'>$1</span>");
         console.log(dosage_unit);
-        $instruction.html(content.replace(dosage_unit_rxp, dosage_unit));
-        
-        var freq_rxp_str = "((once|twice|(three|four|five|six) times)[ ]*(daily|a day|weekly|a week)|(every)?[ ]*[0-9]+(-[0-9]+)?[ ]*hours)";
-        var content = $instruction.html();
-        $instruction.html(content.replace(new RegExp(freq_rxp_str,'i'), "<span style='color: green;'>$1</span>"));
+        $instruction.html(content.replace(dosage_unit_rxp, dosage_unit));        
       }
+
+      // frequency
+      var freq_rxp_str = "((once|twice|(three|four|five|six) times)[ ]*(daily|a day|weekly|a week)|(every)?[ ]*[0-9]+(-[0-9]+)?[ ]*hours)";
+      var content = $instruction.html();
+      $instruction.html(content.replace(new RegExp(freq_rxp_str,'i'), "<span style='color: green;'>$1</span>"));
     }
 
     applyAutoCompleteSearch = function() {
