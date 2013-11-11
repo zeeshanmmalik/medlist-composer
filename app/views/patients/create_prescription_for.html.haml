@@ -448,6 +448,7 @@
                                          //$(this).next().children().find('input:first').autocomplete({
                                          appentTo: $(this),
                                          delay: 0,
+                                         minLength: 0,
                                          //source: drugs_data,
                                          focus: function( event, ui ) {
                                            //console.log("in focus");
@@ -491,15 +492,27 @@
                                              term = drug;
                                            }
 
-                                           console.log(term);                                           
-                                           var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
+                                           var startsWithMatcher = new RegExp("^" + term, "i")
+                                               , startsWith = $.grep(drugs_data, function(value) {
+                                                   return startsWithMatcher.test(value.label || value.value || value);
+                                                 })
+                                               , containsMatcher = new RegExp(term, "i")
+                                               , contains = $.grep(drugs_data, function (value) {
+                                                   return $.inArray(value, startsWith) < 0 &&
+                                                   containsMatcher.test(value.label || value.value || value);
+                                                 });
 
-                                           response($.map(drugs_data, function(el) {
-                                             console.log(term + "  |  " + el.pfn);
-                                             if (matcher.test(el.pfn)) {
-                                               return el;
-                                             }
-                                           }));
+                                           response(startsWith.concat(contains));
+
+                                           //console.log(term);                                          
+                                           //var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
+
+                                           //response($.map(drugs_data, function(el) {
+                                           //  console.log(term + "  |  " + el.pfn);
+                                           //  if (matcher.test(el.pfn)) {
+                                           //    return el;
+                                           //  }
+                                           //}));
                                          }
                                        })
                                        .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
