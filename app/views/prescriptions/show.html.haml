@@ -1,6 +1,7 @@
 .document{class: "#{@font_size}"}
-  .row{style: 'margin-bottom: 10px;'}
-    = link_to "Back to History", history_patient_path(@patient), class: 'btn btn-primary pull-right'
+  .row{style: 'margin-bottom: 20px;text-align:right;'}
+    = link_to 'New MedList', create_prescription_for_patient_path(@patient, prescription_id: @prescription.id), class: 'btn btn-success', method: :post
+    = link_to "Back to History", history_patient_path(@patient), class: 'btn btn-primary'
   .row.x-resizeable
     .span4
       %h4.bold Toronto General Hospital
