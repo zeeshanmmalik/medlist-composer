@@ -1,7 +1,7 @@
 class PatientsController < ApplicationController
   before_filter :authenticate_pharmacist!
   before_action :set_patient, only: [:show, :edit, :update, :destroy, :start_discharge_for,
-                                     :create_prescription_for, :edit_prescription_for]
+                                     :create_prescription_for, :edit_prescription_for, :history]
 
   # GET /patients
   # GET /patients.json
@@ -51,6 +51,11 @@ class PatientsController < ApplicationController
   def start_discharge_for
     @base_templates = Template.all
     @patient_history = @patient.prescriptions.order('updated_at DESC')
+  end
+
+  # GET /patients/1/history
+  def history
+    @patient_history = @patient.prescriptions.paginate(:page => params[:page], :per_page => 10).order('updated_at DESC')
   end
 
   # GET /patients/1/create_prescription_for

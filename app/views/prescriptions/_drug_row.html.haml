@@ -1,0 +1,26 @@
+%tr
+  %td
+    %p= drug.generic_name
+    %p= drug.strength
+    %p.bold= drug.brand_name.blank? ? '':"(#{drug.brand_name})"
+  %td
+    - if drug.instructions.blank?
+      %p= ''
+    - else
+      - drug.instructions.each do |ins|
+        %p= ins.line
+  %td
+    %p= drug.purpose
+  %td
+    %p= drug.am_check
+    %p= drug.am_time
+  %td
+    %p= drug.noon_check
+    %p= drug.noon_time
+  %td
+    %p= drug.supper_check
+    %p= drug.supper_time
+  %td
+    %p= drug.bedtime_check
+    %p= drug.bedtime_time
+    

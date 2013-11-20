@@ -1,18 +1,46 @@
-%p#notice= notice
+.document{class: "#{@font_size}"}
+  .row{style: 'margin-bottom: 10px;'}
+    = link_to "Back to History", history_patient_path(@patient), class: 'btn btn-primary pull-right'
+  .row.x-resizeable
+    .span4
+      %h4.bold Toronto General Hospital
+      %h4.bold Department of Pharmacy
+      %h4.bold Medication List
+    .span4.pull-right
+      %p
+        %strong Patient Name:
+        %span= @patient.last_name + ", " + @patient.first_name
+      %p
+        %strong Date:
+        %span= @prescription.updated_at
+      %p
+        %strong Pharmacist Name:
+        %span= @prescription.pharmacist.name        
+      %p
+        %strong Physician Name:
+        %span= @prescription.physician
+  .row.x-resizeable
+    .span12
+      %p
+        %strong Medication Allergies:
+        %span= @prescription.alergies
+        
+    .span12
+      %table.table.table-bordered.table-hover.table-condensed
+        %thead
+          %tr
+            %th DRUG
+            %th INSTRUCTIONS
+            %th PURPOSE
+            %th AM
+            %th NOON
+            %th SUPPER
+            %th BED-TIME
+        %tbody.drugs
+          - @prescription.drugs.each do |drug|
+            = render partial: 'drug_row', locals: { drug: drug }
 
-%p
-  %b Patient:
-  = @prescription.patient
-%p
-  %b Pharmacist:
-  = @prescription.pharmacist
-%p
-  %b Physician:
-  = @prescription.physician
-%p
-  %b Base template:
-  = @prescription.base_template_id
+    .span12
+      %p= @prescription.note
 
-= link_to 'Edit', edit_prescription_path(@prescription)
-\|
-= link_to 'Back', prescriptions_path
+

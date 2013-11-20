@@ -29,7 +29,9 @@
           %td= patient.admission_date
           / %td= patient.discharge_date
           %td= Pharmacist.find(patient.pharmacist_id).name if patient.pharmacist_id
-          %td= link_to 'Edit MedList', edit_prescription_for_patient_path(patient), class: 'btn btn-small btn-primary'
+          %td
+            = link_to 'Edit MedList', edit_prescription_for_patient_path(patient), class: 'btn btn-small btn-primary'
+            = link_to 'History', history_patient_path(patient), class: 'btn btn-small btn-info'
 
       - if !@new_patients.blank?
         %tr{class: 'break'}
@@ -63,7 +65,9 @@
           %td= patient.admission_date
           / %td= patient.discharge_date
           %td= Pharmacist.find(patient.pharmacist_id).name if patient.pharmacist_id
-          %td= link_to 'New MedList', start_discharge_for_patient_path(patient), class: 'btn btn-small btn-primary'
+          %td
+            = link_to 'New MedList', start_discharge_for_patient_path(patient), class: 'btn btn-small btn-primary'
+            = link_to 'History', history_patient_path(patient), class: 'btn btn-small btn-info'
 
     %br
     

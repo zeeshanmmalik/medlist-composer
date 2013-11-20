@@ -1,0 +1,31 @@
+.row
+  .span12
+    %h3 Patient History
+    %h4
+      Name:
+      = @patient.name
+
+  .span12
+    %table.table.table-striped
+      %tr.column-header
+        %th Program
+        %th Total Drugs
+        %th Last Updated At
+        %th Pharmacist
+        %th Physician
+        %th
+      - @patient_history.each do |pres|
+        %tr{class: cycle('odd','even')}
+          %td= pres.patient.program
+          %td= pres.drugs.count
+          %td= pres.updated_at
+          %td= pres.pharmacist.name
+          %td= pres.physician
+          %td
+            = link_to 'New MedList', create_prescription_for_patient_path(@patient, prescription_id: pres.id), class: 'btn btn-small btn-primary', method: :post
+            = link_to 'View', prescription_path(pres, patient_id: @patient.id), class: 'btn btn-small btn-info'
+        
+.row.center
+  .span12
+    .pagination.pagination-centered
+      = will_paginate @patient_history

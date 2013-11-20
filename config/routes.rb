@@ -11,6 +11,7 @@ DischargeMedlistComposer::Application.routes.draw do
       get 'start_discharge_for'
       post 'create_prescription_for'
       get 'edit_prescription_for'
+      get 'history'
     end
   end
 
