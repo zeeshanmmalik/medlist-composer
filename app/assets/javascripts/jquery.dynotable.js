@@ -66,6 +66,11 @@
                 clonedRow.find('[data-nid]').each( function(index) {
                     $(this).attr('data-nid', new_drug_tmp_id);
                 });                
+                // clear text from cloned row
+                clonedRow.find('[data-editable]').each(function() {
+                    $(this).empty();
+                    $(this).attr('data-initval', '');
+                    });
                 // apply autocomplete search
                 clonedRow.find('[data-editable]').each(function() {
                                applyAutoCompleteSearch.apply(this, arguments);
