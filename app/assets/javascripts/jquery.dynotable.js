@@ -27,7 +27,7 @@
             options = $.extend(defaults, options);
                                                                         
             var cloneRow = function(btn) {
-                var clonedRow = $(btn).closest('tr').clone();  
+                var clonedRow = $(btn).closest('tr').clone();
                 var tbod = $(btn).closest('tbody');
                 insertRow(clonedRow, tbod, btn); 
                 options.onRowClone();
@@ -52,7 +52,8 @@
                     $(btn).closest('tr').after( clonedRow );
                 }
                 bindActions(clonedRow);
-                $(tbod).children("tr:last").hide().fadeIn(options.insertFadeSpeed);
+
+                //$(tbod).children("tr:last").hide().fadeIn(options.insertFadeSpeed);
 
                 // set tmp id attributes for new drug
                 clonedRow.attr('data-new-drug',true);

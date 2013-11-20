@@ -493,7 +493,7 @@
                                        var editable = $(this).data('editable');
                                        var $element = editable.$element;
                                        $element.attr('data-initval', params.newValue);
-                                       console.log($element.attr('data-initval'));
+                                       console.log('IN Editable Save: \n' + $element.attr('data-initval'));
 
                                        // put paranthesis around brand name
                                        if( data_name == 'brand_name' ){
@@ -627,7 +627,7 @@
        $.fn.editable.defaults.mode = 'inline';
        $.fn.editable.defaults.defaultValue = '';
        $.fn.editable.defaults.emptytext = '...';
-
+       $.fn.editable.defaults.onblur = 'submit';
 
        $('[data-editable]').each(function() {
          applyAutoCompleteSearch.apply(this, arguments);
