@@ -55,7 +55,7 @@ class PatientsController < ApplicationController
 
   # GET /patients/1/history
   def history
-    @patient_history = @patient.prescriptions.paginate(:page => params[:page], :per_page => 10).order('updated_at DESC')
+    @patient_history = @patient.prescriptions.finalized.paginate(:page => params[:page], :per_page => 10).order('updated_at DESC')
   end
 
   # GET /patients/1/create_prescription_for

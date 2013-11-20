@@ -22,8 +22,9 @@
           %td= pres.pharmacist.name
           %td= pres.physician
           %td
-            = link_to 'New MedList', create_prescription_for_patient_path(@patient, prescription_id: pres.id), class: 'btn btn-small btn-primary', method: :post
-            = link_to 'View', prescription_path(pres, patient_id: @patient.id), class: 'btn btn-small btn-info'
+            = link_to 'New MedList', create_prescription_for_patient_path(@patient, prescription_id: pres.id), class: 'btn btn-small btn-success', method: :post
+            = link_to 'Show', prescription_path(pres, patient_id: @patient.id), class: 'btn btn-small btn-info'
+            = link_to 'Review', edit_prescription_for_patient_path(@patient), class: 'btn btn-small btn-warning'
         
 .row.center
   .span12
