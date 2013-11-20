@@ -74,7 +74,7 @@ function savePrescription(btn_clicked){
     .done( function() {
         console.log("form success"); 
         disableLoadingClasses();
-        $('#alert_msg').addClass('alert-success').text('Prescription succesfully saved!').animate({
+        $('#alert_msg').addClass('alert-success').text('Discharge Medication List succesfully saved!').animate({
             width: "toggle",
             height: "toggle",
             opacity: "toggle"
