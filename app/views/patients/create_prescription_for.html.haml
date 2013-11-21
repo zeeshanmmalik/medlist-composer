@@ -375,6 +375,10 @@
     function applyEditableValues( $tr_children, item, $tr){
       setEditableValues($tr_children, item, $tr);
       updateEditableInitValues($tr_children, item);
+      reapplyEditable($tr);
+    }
+
+    function reapplyEditable( $tr ){
       $tr.find('[data-editable]').each( function() {
         $(this).editable('destroy');
       });
@@ -498,10 +502,19 @@
                                        // put paranthesis around brand name
                                        if( data_name == 'brand_name' ){
                                          params.newValue = '(' + params.newValue + ')';
-                                       }                                       
+                                       }
+
+                                       // specifically needed for the elements which has autocomplete on them
+                                       // but doesn't hurt to reapply editable on every element
+                                       var $tr = $element.closest('tr');
+                                       var $tr_children = $tr.children();
+                                       //reapplyEditable($tr);
+                                       resetEditableValues($tr_children, $tr);
+                                       matchFrequencyWithTimeChecks($element.closest('tr'));
                                      });
                                $(this).on('hidden', function(e, reason) {
                                  if( arguments.length == 2 ){
+                                   console.log('In Editable Hidden: reason: ' + reason); 
                                    var editable = $(this).data('editable');
                                    var $element = editable.$element;
                                    // color code instruction
