@@ -14,3 +14,7 @@
  *= require bootstrap_and_overrides
  * require_tree .
  */
+
+p.empty-space {
+    height: 50px;
+}

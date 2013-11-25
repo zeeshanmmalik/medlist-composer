@@ -9,6 +9,7 @@
             var defaults = {
                 removeClass: '.row-remover',
                 cloneClass: '.row-cloner',
+                toggleEmptySpaceClass: '.row-spacer',
                 addRowTemplateId: '#add-template',
                 addRowButtonId: '#add-row',
                 lastRowRemovable: false,
@@ -105,6 +106,25 @@
                     });
                 }                            
             }
+
+            var toggleEmptySpace = function(btn) {
+                console.log('in toggle space');
+                var tr = $(btn).parents('tr:first');
+                var empty_space = $(tr).attr('data-empty-space');
+                console.log(empty_space);
+                if( empty_space == 'false' ){
+                    // add empty space
+                    $(tr).height( $(tr).height() + 50 );
+                    $(btn).attr('src', '/assets/remove-space.png').attr('title', 'Remove comments space');
+                    $(tr).attr('data-empty-space', 'true');
+                }else {
+                    // remove empty space
+                    // $(tr).remove('p.empty-space');
+                    $(tr).height( 'auto' );
+                    $(btn).attr('src', '/assets/add-space.png').attr('title', 'Add comments space');
+                    $(tr).attr('data-empty-space', 'false');
+                }                
+            }
                         
             var bindClick = function(elem, fn) {
                 $(elem).click(fn);                
@@ -125,6 +145,14 @@
                     return false;
                 });
             }
+
+            var bindToggleEmptySpaceLink = function(lnk) {
+                bindClick(lnk, function(){
+                    var btn = $(this);
+                    toggleEmptySpace(btn);
+                    return false;
+                });
+            }
                         
             var bindActions = function(obj) {              
                 obj.find(options.removeClass).each(function() {
@@ -135,7 +163,9 @@
                     bindCloneLink($(this));
                 });
 
-
+                obj.find(options.toggleEmptySpaceClass).each(function() {
+                    bindToggleEmptySpaceLink($(this));
+                });
             }
 
             var updateOrderNo = function(obj) {

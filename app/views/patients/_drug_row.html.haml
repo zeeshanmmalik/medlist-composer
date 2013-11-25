@@ -1,6 +1,6 @@
-%tr{data: {drug_id: "#{drug.id}", order_no: "#{drug.order_no || index}"}}
+%tr{data: {drug_id: "#{drug.id}", order_no: "#{drug.order_no || index}", empty_space: "#{drug.empty_space}"}}
   %td.dyno-action
-    = image_tag 'drag.png', class: 'drag-handle', alt: 'click and drag to rearrange'
+    = image_tag 'drag.png', class: 'drag-handle', alt: 'click and drag to rearrange', title: 'Move this drug up/down'
   %td
     %p{data: {editable: true, type: 'text', inputclass: 'input-medium',
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
@@ -54,6 +54,11 @@
               resource: 'prescription', nested: 'drugs', nid: "#{drug.id}",
               name: 'bedtime_time', initval: "#{drug.bedtime_time}"}}= drug.bedtime_time
   %td.dyno-action
-    = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row'
+    = image_tag 'clone.png', :class => 'row-cloner', :alt => 'Clone Row', :title => 'Add new drug'
   %td.dyno-action
-    = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row' 
+    = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row', :title => 'Remove this drug'
+  %td.dyno-action
+    - if drug.empty_space?
+      = image_tag 'remove-space.png', :class => 'row-spacer', :alt => 'Remove empty space', :title => 'Add space for comments'
+    - else
+      = image_tag 'add-space.png', :class => 'row-spacer', :alt => 'Add empty space', :title => 'Remove comments space'

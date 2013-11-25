@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106035025) do
+ActiveRecord::Schema.define(version: 20131125181341) do
 
   create_table "drugs", force: true do |t|
     t.string   "generic_name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20131106035025) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "order_no"
+    t.boolean  "empty_space",   default: false
   end
 
   add_index "drugs", ["drugable_id", "drugable_type"], name: "drugable_index"

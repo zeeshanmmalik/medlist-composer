@@ -3,12 +3,16 @@
     %p= drug.generic_name
     %p= drug.strength
     %p.bold= drug.brand_name.blank? ? '':"(#{drug.brand_name})"
+    - if drug.empty_space?
+      %p.empty-space
   %td
     - if drug.instructions.blank?
       %p= ''
     - else
       - drug.instructions.each do |ins|
         %p= ins.line
+    - if drug.empty_space?
+      %p.empty-space
   %td
     %p= drug.purpose
   %td

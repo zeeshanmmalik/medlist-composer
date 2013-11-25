@@ -627,10 +627,36 @@
                                          }
                                        });
 
-                                     });                                     
-                               }
+                                     });
+                                }
                              };
 
+    function applyEmptySpaceToDrugs() {
+      $('#drugs_table').find('[data-empty-space="true"]').each( function() {
+        $(this).height( $(this).height() + 50 );
+        $($(this).find('img.row-spacer:first')).attr('src','/assets/remove-space.png').attr('title', 'Remove comments space');
+      });
+    }
+
+    function toggleEmptySpaceForDrugs(el) {
+      if( $(el).attr('data-btn-empty-space-state') == 'removed' ) {
+        $(el).attr('data-btn-empty-space-state', 'added');
+        $(el).text('Remove Comments Space').removeClass('btn-success').addClass('btn-danger');
+        $('#drugs_table').find('[data-empty-space="false"]').each( function() {
+          $(this).height( $(this).height() + 50 );
+          $(this).attr('data-empty-space', 'true');
+          $($(this).find('img.row-spacer:first')).attr('src','/assets/remove-space.png').attr('title', 'Remove comments space');
+        });
+      }else {
+        $(el).attr('data-btn-empty-space-state', 'removed');
+        $(el).text('Add Comments Space').removeClass('btn-danger').addClass('btn-success');
+        $('#drugs_table').find('[data-empty-space="true"]').each( function() {
+          $(this).height( 'auto' );
+          $(this).attr('data-empty-space', 'false');
+          $($(this).find('img.row-spacer:first')).attr('src','/assets/add-space.png').attr('title', 'Add comments space');
+        });      
+      }
+    }
 
     $(document).ready(function(){
        //$(window).on('load',function(){
@@ -660,6 +686,8 @@
          $.cookie('TEXT_SIZE',textSize, { path: '/', expires: 10000 });
          return false;
        });
+
+       applyEmptySpaceToDrugs();
        console.log('done');
     });
 
@@ -704,7 +732,8 @@
         %span{data: {editable: true, type: 'text', inputclass: 'input-large',
                      resource: 'prescription', name: 'alergies', url: "/prescriptions/#{@prescription.id}"}}= @prescription.alergies
     .span12
-      %ul.resizer{style:'float:right'}
+      = link_to 'Add Comments Space', 'javascript:void(0)', class: 'btn btn-success btn-small', data: { btn_empty_space_state: 'removed' }, onclick: 'toggleEmptySpaceForDrugs(this);'
+      %ul.resizer.pull-right
         %li.small
           %a{href: "#"} A
         %li.medium
@@ -723,6 +752,7 @@
             %th NOON
             %th SUPPER
             %th BED-TIME
+            %th.control
             %th.control
             %th.control
         %tbody.drugs

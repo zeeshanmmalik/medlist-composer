@@ -37,7 +37,7 @@
               %th SUPPER
               %th BED-TIME
           %tbody.drugs
-            - @prescription.drugs.each do |drug|
+            - @prescription.drugs.order('order_no ASC').each do |drug|
               = render partial: 'pdf_drug_row', locals: { drug: drug }
 
       .span12
