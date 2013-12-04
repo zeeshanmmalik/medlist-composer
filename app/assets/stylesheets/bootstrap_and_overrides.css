@@ -13,6 +13,17 @@ body {
     padding-bottom: 100px;
 }
 
+.center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.ui-autocomplete.ui-menu .ui-menu-item a {
+    padding: 10px;
+}
+
 ul.resizer { float:right; }
 ul.resizer li { display:inline; }
 
