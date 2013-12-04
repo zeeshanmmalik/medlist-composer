@@ -57,7 +57,7 @@
                        .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                          var history_link = ((item.history_link != '') ? item.history_link : 'No history');
                          return $( "<li>" )
-                                .append( "<a><b>MRN:</b> " + item.mrn +
+                                .append( "<a title='Select to " + ((item.link_to == "start") ? "start discharge":"edit") + " medlist'><b>MRN:</b> " + item.mrn +
                                          " | <b>Name:</b> " + item.name +
                                          " | <b>Pharmacist:</b> " + item.pharmacist +
                                          "<div style='text-align:left;margin-top:10px;'>" +
