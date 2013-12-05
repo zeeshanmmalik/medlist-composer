@@ -59,6 +59,6 @@
     = image_tag 'remove.png', :class => 'row-remover', :alt => 'Remove Row', :title => 'Remove this drug'
   %td.dyno-action
     - if drug.empty_space?
-      = image_tag 'remove-space.png', :class => 'row-spacer', :alt => 'Remove empty space', :title => 'Add space for comments'
+      = image_tag 'remove-space.png', :class => 'row-spacer', :alt => 'Remove extra space', :title => 'Remove extra space'
     - else
-      = image_tag 'add-space.png', :class => 'row-spacer', :alt => 'Add empty space', :title => 'Remove comments space'
+      = image_tag 'add-space.png', :class => 'row-spacer', :alt => 'Add extra space', :title => 'Add extra space'

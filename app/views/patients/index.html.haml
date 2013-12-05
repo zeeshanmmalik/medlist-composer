@@ -40,12 +40,12 @@
 
                            var startsWithMatcher = new RegExp("^" + term, "i")
                                , startsWith = $.grep(patients_data, function(value) {
-                                   console.log(value);
+                                   // console.log(value);
                                    return startsWithMatcher.test(value.name) || startsWithMatcher.test(value.mrn) || startsWithMatcher.test(value.pharmacist);
                                  })
                                , containsMatcher = new RegExp(term, "i")
                                , contains = $.grep(patients_data, function (value) {
-                                   console.log($.inArray(value, startsWith));
+                                   // console.log($.inArray(value, startsWith));
                                    return $.inArray(value, startsWith) < 0 &&
                                    ( containsMatcher.test(value.name) || containsMatcher.test(value.mrn) || containsMatcher.test(value.pharmacist) );
                                  });

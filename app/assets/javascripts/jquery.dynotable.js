@@ -115,13 +115,13 @@
                 if( empty_space == 'false' ){
                     // add empty space
                     $(tr).height( $(tr).height() + 50 );
-                    $(btn).attr('src', '/assets/remove-space.png').attr('title', 'Remove comments space');
+                    $(btn).attr('src', '/assets/remove-space.png').attr('title', 'Remove extra space');
                     $(tr).attr('data-empty-space', 'true');
                 }else {
                     // remove empty space
                     // $(tr).remove('p.empty-space');
                     $(tr).height( 'auto' );
-                    $(btn).attr('src', '/assets/add-space.png').attr('title', 'Add comments space');
+                    $(btn).attr('src', '/assets/add-space.png').attr('title', 'Add extra space');
                     $(tr).attr('data-empty-space', 'false');
                 }                
             }

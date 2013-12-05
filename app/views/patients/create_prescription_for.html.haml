@@ -1,9 +1,6 @@
 - content_for :page_js do
-  -# %script{src: "https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js", type: "text/javascript"}
-  -# %script{src: "http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/js/bootstrap-editable.min.js", type: "text/javascript"}
   = javascript_include_tag 'jquery.dynotable.js'
   = javascript_include_tag 'prescription_template.js'
-  -# javascript_include_tag 'drugs_autocomplete.js'
   = javascript_include_tag 'drugs_mapping_data.js'
   
   :javascript
@@ -325,26 +322,26 @@
     function applyEmptySpaceToDrugs() {
       $('#drugs_table').find('[data-empty-space="true"]').each( function() {
         $(this).height( $(this).height() + 50 );
-        $($(this).find('img.row-spacer:first')).attr('src','/assets/remove-space.png').attr('title', 'Remove comments space');
+        $($(this).find('img.row-spacer:first')).attr('src','/assets/remove-space.png').attr('title', 'Remove extra space');
       });
     }
 
     function toggleEmptySpaceForDrugs(el) {
       if( $(el).attr('data-btn-empty-space-state') == 'removed' ) {
         $(el).attr('data-btn-empty-space-state', 'added');
-        $(el).text('Remove Comments Space').removeClass('btn-success').addClass('btn-danger');
+        $(el).text('Remove Extra Space From All Drugs').removeClass('btn-success').addClass('btn-danger');
         $('#drugs_table').find('[data-empty-space="false"]').each( function() {
           $(this).height( $(this).height() + 50 );
           $(this).attr('data-empty-space', 'true');
-          $($(this).find('img.row-spacer:first')).attr('src','/assets/remove-space.png').attr('title', 'Remove comments space');
+          $($(this).find('img.row-spacer:first')).attr('src','/assets/remove-space.png').attr('title', 'Remove extra space');
         });
       }else {
         $(el).attr('data-btn-empty-space-state', 'removed');
-        $(el).text('Add Comments Space').removeClass('btn-danger').addClass('btn-success');
+        $(el).text('Add Extra Space To All Drugs').removeClass('btn-danger').addClass('btn-success');
         $('#drugs_table').find('[data-empty-space="true"]').each( function() {
           $(this).height( 'auto' );
           $(this).attr('data-empty-space', 'false');
-          $($(this).find('img.row-spacer:first')).attr('src','/assets/add-space.png').attr('title', 'Add comments space');
+          $($(this).find('img.row-spacer:first')).attr('src','/assets/add-space.png').attr('title', 'Add extra space');
         });      
       }
     }
@@ -367,6 +364,7 @@
        });
 
        $('[data-editable]').editable();
+       $('[data-editable-info]').editable();
     
        if($.cookie('TEXT_SIZE')) {
          $('body').addClass($.cookie('TEXT_SIZE')); 
@@ -397,33 +395,33 @@
     .span7
       %p#patient_id{data: {patient_id: "#{@patient.id}"}}
         %strong Patient Name:
-        %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
+        %span{data: {editable_info: true, type: 'text', inputclass: 'input-medium',
                      resource: 'patient', name: 'last_name', url: "/patients/#{@patient.id}"}}= @patient.last_name
         %span= ", "
-        %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
+        %span{data: {editable_info: true, type: 'text', inputclass: 'input-medium',
                      resource: 'patient', name: 'first_name', url: "/patients/#{@patient.id}"}}= @patient.first_name        
       %p
         %strong Date:
-        %span{data: {editable: true, type: 'date', inputclass: 'input-medium'}}= Date.today
+        %span{data: {editable_info: false, type: 'date', inputclass: 'input-medium'}}= Date.today
       %p#pharmacist_id{data: {pharmacist_id: "#{current_pharmacist.id}"}}
         %strong Pharmacist Name:
-        %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
+        %span{data: {editable_info: true, type: 'text', inputclass: 'input-medium',
                      resource: 'pharmacist', name: 'last_name', url: "/pharmacists/#{current_pharmacist.id}"}}= current_pharmacist.last_name
         %span= ", "
-        %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
+        %span{data: {editable_info: true, type: 'text', inputclass: 'input-medium',
                      resource: 'pharmacist', name: 'first_name', url: "/pharmacists/#{@patient.id}"}}= current_pharmacist.first_name        
       %p
         %strong Physician Name:
-        %span{data: {editable: true, type: 'text', inputclass: 'input-medium',
+        %span{data: {editable_info: true, type: 'text', inputclass: 'input-medium',
                      resource: 'prescription', name: 'physician', url: "/prescriptions/#{@prescription.id}"}}= @prescription.physician
   .row.x-resizeable
     .span12
       %p
         %strong Medication Allergies:
-        %span{data: {editable: true, type: 'text', inputclass: 'input-large',
+        %span{data: {editable_info: true, type: 'text', inputclass: 'input-large',
                      resource: 'prescription', name: 'alergies', url: "/prescriptions/#{@prescription.id}"}}= @prescription.alergies
     .span12
-      = link_to 'Add Comments Space', 'javascript:void(0)', class: 'btn btn-success btn-small', data: { btn_empty_space_state: 'removed' }, onclick: 'toggleEmptySpaceForDrugs(this);'
+      = link_to 'Add Extra Space To All Drugs', 'javascript:void(0)', class: 'btn btn-success btn-small', data: { btn_empty_space_state: 'removed' }, onclick: 'toggleEmptySpaceForDrugs(this);'
       %ul.resizer.pull-right
         %li.small
           %a{href: "#"} A
@@ -451,7 +449,7 @@
             = render partial: 'drug_row', locals: { drug: drug, index: index}
 
     .span12
-      %p{data: {editable: true, type: 'text', inputclass: 'input-large',
+      %p{data: {editable_info: true, type: 'text', inputclass: 'input-large',
                      resource: 'prescription', name: 'note', url: "/prescriptions/#{@prescription.id}"}}= @prescription.note
 
   .row{style: 'margin-top:50px;'}
